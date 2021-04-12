@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<parameters>
+	<item>
+		<name>test</name>
+		<type>int</type>
+		<value>12</value>
+		<min>0</min>
+		<max>128</max>
+	</item>
+</parameters>
