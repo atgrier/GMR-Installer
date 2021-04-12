@@ -1,7 +1,7 @@
 ﻿using System;
-using System.IO
-using ArduinoUploader;
-using ArduinoUploader.Hardware;
+using System.IO;
+//using ArduinoUploader;
+//using ArduinoUploader.Hardware;
 
 namespace loco_prog
 {
@@ -20,6 +20,12 @@ namespace loco_prog
             //        ArduinoModel = ArduinoModel.UnoR3
             //    });
             //uploader.UploadSketch();
+
+            string[] sketches = { "controller", "receiver" };
+            foreach (string sketch in sketches)
+            {
+                new ArudinoSketch("main_scripts", sketch);
+            }
         }
     }
 
@@ -43,22 +49,22 @@ namespace loco_prog
 
         private void ReadSketch()
         {
-
+            Console.WriteLine(sketch_path);
         }
 
         private void GetChanges()
         {
-
+            Console.WriteLine(header_path);
         }
 
         private void MakeChanges()
         {
-
+            Console.WriteLine(parameter_path);
         }
 
         private void SaveSketch()
         {
-
+            Console.WriteLine("saving file");
         }
     }
 }
