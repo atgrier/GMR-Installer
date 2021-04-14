@@ -1,10 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <parameters>
 	<item>
-		<name>test</name>
+		<name>CLIENT_ADDRESS</name>
 		<type>int</type>
-		<value>12</value>
-		<min>0</min>
-		<max>128</max>
+		<value>101</value>
+		<min>101</min>
+		<max>199</max>
+	</item>
+	<item>
+		<name>LOCOMOTIVE_1</name>
+		<type>int</type>
+		<value>201</value>
+		<min>201</min>
+		<max>299</max>
+	</item>
+	<item>
+		<name>LOCOMOTIVE_2</name>
+		<type>int</type>
+		<value>202</value>
+		<min>201</min>
+		<max>299</max>
+	</item>
+	<item>
+		<name>LOCOMOTIVE_3</name>
+		<type>int</type>
+		<value>203</value>
+		<min>201</min>
+		<max>299</max>
+	</item>
+	<item>
+		<name>LOCOMOTIVE_4</name>
+		<type>int</type>
+		<value>204</value>
+		<min>201</min>
+		<max>299</max>
 	</item>
 </parameters>
