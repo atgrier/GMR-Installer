@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,11 +6,44 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="main_scripts\controller\controller.h" />
+    <None Remove="main_scripts\controller\controller.ino" />
+    <None Remove="main_scripts\controller\controller.xml" />
+    <None Remove="main_scripts\receiver\receiver.h" />
+    <None Remove="main_scripts\receiver\receiver.ino" />
+    <None Remove="main_scripts\receiver\receiver.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="main_scripts\controller\controller.h" />
+    <EmbeddedResource Include="main_scripts\controller\controller.ino" />
+    <EmbeddedResource Include="main_scripts\controller\controller.xml" />
+    <EmbeddedResource Include="main_scripts\receiver\receiver.h" />
+    <EmbeddedResource Include="main_scripts\receiver\receiver.ino" />
+    <EmbeddedResource Include="main_scripts\receiver\receiver.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ArduinoUploader" Version="3.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="libraries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
