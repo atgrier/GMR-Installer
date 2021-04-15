@@ -3,6 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <StartupObject>loco_prog.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
