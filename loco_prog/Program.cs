@@ -60,7 +60,7 @@ namespace loco_prog
             using Stream stream = assembly.GetManifestResourceStream(
                 $"loco_prog.main_scripts.{ sketch_name}.{sketch_name}.{extension}");
             using StreamReader reader = new StreamReader(stream);
-                return reader.ReadToEnd();
+            return reader.ReadToEnd();
         }
 
         private void ReadSketch()
@@ -72,12 +72,16 @@ namespace loco_prog
 
         private string GetChange(XmlNode xmlNode)
         {
-            string value = xmlNode.SelectSingleNode("value").Value;
+            string value = xmlNode.SelectSingleNode("value").InnerText;
             Console.WriteLine(
-                $"Input value for the variable: <{xmlNode.SelectSingleNode("name").Value}>. " +
-                $"If left blank, the default ({value}) will be used.");
-            value ??= Console.ReadLine();
-            Console.WriteLine(value);
+                $"Input a <{xmlNode.SelectSingleNode("type").InnerText}> value for the variable: <" +
+                $"{xmlNode.SelectSingleNode("name").InnerText}>. If left blank, the default <" +
+                $"{value}> will be used. The valid range is from <" +
+                $"{xmlNode.SelectSingleNode("min").InnerText}> to <" +
+                $"{xmlNode.SelectSingleNode("max").InnerText}>.");
+            Console.Write(" > ");
+            string read_line = Console.ReadLine();
+            value = read_line == "" ? value : read_line;
             return value;
         }
 
@@ -85,12 +89,11 @@ namespace loco_prog
         {
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(parameters_ref);
-            XmlNodeList parentNode = xmlDoc.GetElementsByTagName("item");
+            XmlNodeList parentNode = xmlDoc.SelectNodes("parameters/item");
             foreach (XmlNode childNode in parentNode)
             {
                 Type type;
-                Console.WriteLine(childNode.SelectSingleNode("name").Value);
-                switch (childNode.SelectSingleNode("type").Value)
+                switch (childNode.SelectSingleNode("type").InnerText)
                 {
                     case "int":
                         type = typeof(int);
@@ -103,8 +106,8 @@ namespace loco_prog
                         type = typeof(int);
                         break;
                 }
-                string value = GetChange(childNode);
-                parameters_mod[childNode.SelectSingleNode("name").Value] = new Tuple<Type, string>(type, value);
+                parameters_mod[childNode.SelectSingleNode("name").InnerText] =
+                    new Tuple<Type, string>(type, GetChange(childNode));
             }
         }
 
