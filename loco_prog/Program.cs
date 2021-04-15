@@ -42,7 +42,7 @@ namespace loco_prog
 
         private string sketch_mod;
         private string header_mod;
-        private Dictionary<string, Tuple<Type, string>> parameters_mod;
+        private Dictionary<string, Tuple<Type, string>> parameters_mod = new Dictionary<string, Tuple<Type, string>>();
 
         public ArudinoSketch(string name)
         {
