@@ -73,14 +73,17 @@ namespace loco_prog
         private string GetChange(XmlNode xmlNode)
         {
             string value = xmlNode.SelectSingleNode("value").InnerText;
-            Console.WriteLine(
-                $"Input a <{xmlNode.SelectSingleNode("type").InnerText}> value for the variable: <" +
+            string type = xmlNode.SelectSingleNode("type").InnerText;
+            string min = xmlNode.SelectSingleNode("min").InnerText;
+            string max = xmlNode.SelectSingleNode("max").InnerText;
+            Console.WriteLine($"Input a <{type}> value for the variable: <" +
                 $"{xmlNode.SelectSingleNode("name").InnerText}>. If left blank, the default <" +
-                $"{value}> will be used. The valid range is from <" +
-                $"{xmlNode.SelectSingleNode("min").InnerText}> to <" +
-                $"{xmlNode.SelectSingleNode("max").InnerText}>.");
+                $"{value}> will be used. The valid range is from <{min}> to <{max}>.");
             Console.Write(" > ");
             string read_line = Console.ReadLine();
+            if (!float.TryParse(read_line, out _) || float.Parse(read_line) < float.Parse(min) ||
+                float.Parse(read_line) > float.Parse(max))
+                read_line = "";
             value = read_line == "" ? value : read_line;
             return value;
         }
