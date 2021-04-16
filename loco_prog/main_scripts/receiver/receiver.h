@@ -9,8 +9,8 @@
 #include <TrainMotor.h>
 
 // Radio parameters
-#define CLIENT_ADDRESS 101 // Controller's address
-#define SERVER_ADDRESS 202 // Locomotive's address
+#define CONTROLLER_ADDRESS <CONTROLLER_ADDRESS> // Controller's address
+#define LOCOMOTIVE_ADDRESS <LOCOMOTIVE_ADDRESS> // Locomotive's address
 #define RF69_FREQ 868.0
 #define RFM69_CS 8
 #define RFM69_INT 7
@@ -34,7 +34,7 @@
 
 // Radio initialization
 RH_RF69 driver(RFM69_CS, RFM69_INT);
-RHReliableDatagram manager(driver, SERVER_ADDRESS);
+RHReliableDatagram manager(driver, LOCOMOTIVE_ADDRESS);
 uint8_t buf[RH_RF69_MAX_MESSAGE_LEN];
 
 // Other initialization

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <parameters>
 	<item>
-		<name>CLIENT_ADDRESS</name>
+		<name>CONTROLLER_ADDRESS</name>
 		<type>int</type>
 		<value>101</value>
 		<min>101</min>

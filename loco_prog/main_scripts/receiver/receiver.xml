@@ -1,10 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <parameters>
 	<item>
-		<name>test</name>
+		<name>CONTROLLER_ADDRESS</name>
 		<type>int</type>
-		<value>12</value>
-		<min>0</min>
-		<max>128</max>
+		<value>101</value>
+		<min>101</min>
+		<max>199</max>
+	</item>
+	<item>
+		<name>LOCOMOTIVE_ADDRESS</name>
+		<type>int</type>
+		<value>201</value>
+		<min>201</min>
+		<max>299</max>
 	</item>
 </parameters>

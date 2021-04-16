@@ -9,7 +9,7 @@
 #include <RH_RF69.h>
 
 // Radio parameters
-#define CLIENT_ADDRESS <CLIENT_ADDRESS> // Controller's address
+#define CONTROLLER_ADDRESS <CONTROLLER_ADDRESS> // Controller's address
 #define RF69_FREQ 868.0
 #define RFM69_CS 8
 #define RFM69_INT 7
