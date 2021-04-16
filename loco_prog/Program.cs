@@ -25,10 +25,20 @@ namespace loco_prog
             //uploader.UploadSketch();
 
             string[] sketches = { "controller", "receiver" };
-            foreach (string sketch in sketches)
+            Console.WriteLine($"Enter Digit to select sketch, [0] {sketches[0]}, [1] {sketches[1]}:");
+            Console.Write(" > ");
+            string index_string = Console.ReadLine();
+            if (!int.TryParse(index_string, out int index))
             {
-                new ArudinoSketch(sketch);
+                Console.WriteLine($"Unable to parse digit; defaulting to {sketches[0]}.");
+                index = 0;
             }
+            if (index < 0 || index > 1)
+            {
+                Console.WriteLine($"Digit out of valid range; defaulting to {sketches[0]}.");
+                index = 0;
+            }
+            new ArudinoSketch(sketches[index]);
         }
     }
 
