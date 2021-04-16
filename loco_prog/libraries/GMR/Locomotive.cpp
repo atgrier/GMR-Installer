@@ -1,5 +1,5 @@
 /*
-  Locomotive.h
+  Locomotive.cpp
   Created by Alan T. Grier, 23 September 2019.
 */
 
@@ -7,12 +7,12 @@
 #include "Locomotive.h"
 
 // Class containing methods to address the locomotive
-Locomotive::Locomotive(int address, int ledPin, RHDatagram *manager)
+Locomotive::Locomotive(int address, int ledPin, Radio* radio)
 {
     _address = address;
     _ledPin = ledPin;
     pinMode(_ledPin, OUTPUT);
-    _manager = manager;
+    _radio = radio;
 }
 
 // Set locomotive's direction to -1 (reverse)
@@ -43,7 +43,7 @@ void Locomotive::sendThrottle()
     // Serial.print(pdata[0]);
     // Serial.print((int)pdata[1]);
     // Serial.println((int)pdata[2]);
-    _manager->sendto((uint8_t *)pdata, strlen(pdata) + 1, _address);
+    _radio->send((uint8_t*)pdata, strlen(pdata) + 1, _address);
 }
 
 // Send E-Stop command
@@ -51,12 +51,12 @@ void Locomotive::sendEStop()
 {
     char pdata[1];
     pdata[0] = 'e'; // E-Stop
-    _manager->sendto((uint8_t *)pdata, strlen(pdata) + 1, _address);
+    _radio->send((uint8_t*)pdata, strlen(pdata) + 1, _address);
 }
 
 // Class for managing multiple locomotives controlled by a single physical controller
 Controller::Controller(int led0, int led1, int max_speed, int num_locomotives,
-                       Locomotive *locomotives)
+    Locomotive* locomotives)
 {
     _locomotives = locomotives;
     _num_locomotives = num_locomotives;

@@ -5,7 +5,7 @@
 
 #include <Arduino.h>
 #include <Locomotive.h>
-#include <RHDatagram.h>
+#include <Radio.h>
 #include <RH_RF69.h>
 
 // Radio parameters
@@ -50,8 +50,8 @@
 
 // Trick VS Code into understanding that EIMSK and INT1 are valid identifiers
 #ifndef EIMSK
-  int EIMSK = 0;
-  int INT1 = 0;
+int EIMSK = 0;
+int INT1 = 0;
 #endif
 
 // Interrupt control
@@ -63,7 +63,7 @@
 
 // Radio initialization
 RH_RF69 driver(RFM69_CS, RFM69_INT);
-RHDatagram manager(driver, CLIENT_ADDRESS);
+Radio radio(CONTROLLER_ADDRESS, &driver);
 uint8_t buf[RH_RF69_MAX_MESSAGE_LEN];
 
 // Other initialization
@@ -75,11 +75,11 @@ uint32_t e_stop_timer;
 
 // Controller object with list of locomotives
 Locomotive locomotives[] = {
-	Locomotive(<LOCOMOTIVE_1>, TRAIN_LED_0, &manager), // DB Steam
-	Locomotive(<LOCOMOTIVE_2>, TRAIN_LED_1, &manager), // Great Norther Steam
-	Locomotive(<LOCOMOTIVE_4>, TRAIN_LED_2, &manager), // RhB Ge 6/6 1 (Crocodile)
-	Locomotive(<LOCOMOTIVE_4>, TRAIN_LED_3, &manager)	// Stainz
+	Locomotive(<LOCOMOTIVE_1>, TRAIN_LED_0, &radio), // DB Steam
+	Locomotive(<LOCOMOTIVE_2>, TRAIN_LED_1, &radio), // Great Norther Steam
+	Locomotive(<LOCOMOTIVE_3>, TRAIN_LED_2, &radio), // RhB Ge 6/6 1 (Crocodile)
+	Locomotive(<LOCOMOTIVE_4>, TRAIN_LED_3, &radio)	// Stainz
 };
 const int num_locomotives = (int)(sizeof(locomotives) / sizeof(Locomotive));
 Controller trains = Controller(LED_INDICATOR_0, LED_INDICATOR_1, SPEED_MAX, num_locomotives,
-							   locomotives);
+	locomotives);

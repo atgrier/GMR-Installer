@@ -11,13 +11,11 @@ void setup()
     Serial.flush();
 
     // Initialize radio
-    manager.init();
     driver.setFrequency(RF69_FREQ);
     driver.setTxPower(20, true);
-    uint8_t key[] = {0xa, 0xb, 0xa, 0xd, 0xc, 0xa, 0xf, 0xe,
-                     0xd, 0xe, 0xa, 0xd, 0xb, 0xe, 0xe, 0xf};
+    uint8_t key[] = { 0xa, 0xb, 0xa, 0xd, 0xc, 0xa, 0xf, 0xe,
+                     0xd, 0xe, 0xa, 0xd, 0xb, 0xe, 0xe, 0xf };
     driver.setEncryptionKey(key);
-    manager.setTimeout(50);
 
     pinMode(PIN_BATTERY, INPUT);
     // pinMode(13, OUTPUT);
@@ -29,12 +27,12 @@ void loop()
 {
     // readBatteryVoltage();
 
-    if (manager.available())
+    if (radio.available())
     {
         // Serial.println("manager");
         uint8_t len = sizeof(buf);
         uint8_t from;
-        if (manager.recvfrom(buf, &len, &from))
+        if (radio.receive(buf, &len, &from))
         {
             //Serial.print("got request from : 0x");
             //Serial.print(from, HEX);
@@ -79,7 +77,7 @@ void shutdown()
         ;
 }
 
-void throttle(uint8_t *command)
+void throttle(uint8_t* command)
 {
     int spd = (int)command[1];
     int dir = (int)command[2] == 1 ? 1 : -1;
@@ -95,7 +93,7 @@ void throttle(uint8_t *command)
         locomotive.setSpeed(spd * dir);
 }
 
-void function(uint8_t *command)
+void function(uint8_t* command)
 {
     0;
 }
