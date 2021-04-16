@@ -61,6 +61,8 @@ namespace loco_prog
             GetChanges();
             MakeChanges();
             SaveSketch();
+            CompileSketch();
+            UploadSketch();
         }
 
         private string ReadFile(string extension)
@@ -142,12 +144,22 @@ namespace loco_prog
             foreach (KeyValuePair<string, string> parameter in parameters_mod)
                 header_mod = header_mod.Replace($"<{parameter.Key}>", parameter.Value);
             Console.WriteLine(header_mod);
-            Console.WriteLine("making changes");
         }
 
         private void SaveSketch()
         {
-            Console.WriteLine("saving file");
+            File.WriteAllText($"loco_prog.libraries.sketch.{sketch_name}.ino", sketch);
+            File.WriteAllText($"loco_prog.libraries.sketch.{sketch_name}.h", header_mod);
+        }
+
+        private void CompileSketch()
+        {
+            Console.WriteLine("compiling file");
+        }
+
+        private void UploadSketch ()
+        {
+            Console.WriteLine("uploading file");
         }
     }
 }
