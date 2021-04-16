@@ -6,12 +6,12 @@
 #ifndef Locomotive_h
 #define Locomotive_h
 
-#include <RHReliableDatagram.h>
+#include <RHDatagram.h>
 
 class Locomotive
 {
 public:
-    Locomotive(int address, int ledPin, RHReliableDatagram *manager);
+    Locomotive(int address, int ledPin, RHDatagram *manager);
     void reverse();           // Change direction to -1
     void forward();           // Change direction to 1
     void setSpeed(int speed); // Set the speed of the locomotive
@@ -26,7 +26,7 @@ private:
     int _direction = 1;           // -1 for reverse, +1 for forward
     int _address;                 // Positive number
     int _ledPin;                  // Arudino PIN of status LED
-    RHReliableDatagram *_manager; // Radio manager
+    RHDatagram *_manager; // Radio manager
 };
 
 class Controller

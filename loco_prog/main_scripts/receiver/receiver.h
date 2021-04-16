@@ -4,7 +4,7 @@
 */
 
 #include <Arduino.h>
-#include <RHReliableDatagram.h>
+#include <RHDatagram.h>
 #include <RH_RF69.h>
 #include <TrainMotor.h>
 
@@ -34,7 +34,7 @@
 
 // Radio initialization
 RH_RF69 driver(RFM69_CS, RFM69_INT);
-RHReliableDatagram manager(driver, LOCOMOTIVE_ADDRESS);
+RHDatagram manager(driver, LOCOMOTIVE_ADDRESS);
 uint8_t buf[RH_RF69_MAX_MESSAGE_LEN];
 
 // Other initialization

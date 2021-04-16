@@ -7,7 +7,7 @@
 #include "Locomotive.h"
 
 // Class containing methods to address the locomotive
-Locomotive::Locomotive(int address, int ledPin, RHReliableDatagram *manager)
+Locomotive::Locomotive(int address, int ledPin, RHDatagram *manager)
 {
     _address = address;
     _ledPin = ledPin;
