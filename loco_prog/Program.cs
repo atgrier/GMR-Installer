@@ -36,13 +36,12 @@ namespace loco_prog
     {
         private readonly string sketch_name;
 
-        private string sketch_ref;
+        private string sketch;
         private string header_ref;
         private string parameters_ref;
 
-        private string sketch_mod;
         private string header_mod;
-        private Dictionary<string, Tuple<Type, string>> parameters_mod = new Dictionary<string, Tuple<Type, string>>();
+        private Dictionary<string, string> parameters_mod = new Dictionary<string, string>();
 
         public ArudinoSketch(string name)
         {
@@ -65,7 +64,7 @@ namespace loco_prog
 
         private void ReadSketch()
         {
-            sketch_ref = ReadFile("ino");
+            sketch = ReadFile("ino");
             header_ref = ReadFile("h");
             parameters_ref = ReadFile("xml");
         }
@@ -73,19 +72,49 @@ namespace loco_prog
         private string GetChange(XmlNode xmlNode)
         {
             string value = xmlNode.SelectSingleNode("value").InnerText;
-            string type = xmlNode.SelectSingleNode("type").InnerText;
+            string type_string = xmlNode.SelectSingleNode("type").InnerText;
             string min = xmlNode.SelectSingleNode("min").InnerText;
             string max = xmlNode.SelectSingleNode("max").InnerText;
-            Console.WriteLine($"Input a <{type}> value for the variable: <" +
+            Console.WriteLine($"Input a <{type_string}> value for the variable: <" +
                 $"{xmlNode.SelectSingleNode("name").InnerText}>. If left blank, the default <" +
                 $"{value}> will be used. The valid range is from <{min}> to <{max}>.");
             Console.Write(" > ");
             string read_line = Console.ReadLine();
-            if (!float.TryParse(read_line, out _) || float.Parse(read_line) < float.Parse(min) ||
-                float.Parse(read_line) > float.Parse(max))
+            bool try_parse = float.TryParse(read_line, out _);
+            float float_value;
+            if (try_parse)
+            {
+                try
+                {
+                    switch (type_string)
+                    {
+                        case "int":
+                            float_value = float.Parse(read_line);
+                            read_line = int.Parse(read_line).ToString();
+                            break;
+                        case "float":
+                            float_value = float.Parse(read_line);
+                            read_line = float_value.ToString();
+                            break;
+                        default:
+                            goto case "int";
+                    }
+                    if (float_value < float.Parse(min) || float_value > float.Parse(max))
+                    {
+                        Console.WriteLine("Entry outside of valid range; using default value.");
+                        read_line = "";
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Unable to parse entry; using default value.");
+                    read_line = "";
+                }
+            }
+            else
                 read_line = "";
-            value = read_line == "" ? value : read_line;
-            return value;
+            read_line = read_line == "" ? value : read_line;
+            return read_line;
         }
 
         private void GetChanges()
@@ -94,28 +123,14 @@ namespace loco_prog
             xmlDoc.LoadXml(parameters_ref);
             XmlNodeList parentNode = xmlDoc.SelectNodes("parameters/item");
             foreach (XmlNode childNode in parentNode)
-            {
-                Type type;
-                switch (childNode.SelectSingleNode("type").InnerText)
-                {
-                    case "int":
-                        type = typeof(int);
-                        break;
-                    case "float":
-                        type = typeof(float);
-                        break;
-                    default:
-                        Console.WriteLine("Invalid type encountered, defaulting to int.");
-                        type = typeof(int);
-                        break;
-                }
-                parameters_mod[childNode.SelectSingleNode("name").InnerText] =
-                    new Tuple<Type, string>(type, GetChange(childNode));
-            }
+                parameters_mod[childNode.SelectSingleNode("name").InnerText] = GetChange(childNode);
         }
 
         private void MakeChanges()
         {
+            header_mod = header_ref;
+            foreach (KeyValuePair<string, string> parameter in parameters_mod)
+                header_mod.Replace($"<{parameter.Key}>", parameter.Value);
             Console.WriteLine("making changes");
         }
 
