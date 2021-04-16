@@ -130,7 +130,8 @@ namespace loco_prog
         {
             header_mod = header_ref;
             foreach (KeyValuePair<string, string> parameter in parameters_mod)
-                header_mod.Replace($"<{parameter.Key}>", parameter.Value);
+                header_mod = header_mod.Replace($"<{parameter.Key}>", parameter.Value);
+            Console.WriteLine(header_mod);
             Console.WriteLine("making changes");
         }
 
