@@ -154,11 +154,6 @@ namespace loco_prog
             File.WriteAllText(@$".\libraries\sketch\{sketch_name}.h", header_mod);
         }
 
-        private void SaveLibraries()
-        {
-
-        }
-
         private void CompileSketch()
         {
             Console.WriteLine("compiling file");
