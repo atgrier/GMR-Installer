@@ -7,12 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="libraries\MAKEFILE" />
     <None Remove="main_scripts\controller\controller.h" />
     <None Remove="main_scripts\controller\controller.ino" />
     <None Remove="main_scripts\controller\controller.xml" />
     <None Remove="main_scripts\receiver\receiver.h" />
     <None Remove="main_scripts\receiver\receiver.ino" />
     <None Remove="main_scripts\receiver\receiver.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="libraries\MAKEFILE">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
