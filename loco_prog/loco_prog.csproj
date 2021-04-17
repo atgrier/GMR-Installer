@@ -47,4 +47,406 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Caterina-Atmega32u4.hex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Caterina-BluefruitMicro8.hex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Caterina-Circuitplay32u4.hex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Caterina-Esplora.hex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Caterina-Esplora.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Caterina-Feather32u4.hex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Caterina-Flora8.hex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Caterina-Leonardo.hex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Caterina-Leonardo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Caterina-Micro.hex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Caterina-Micro.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Caterina-Yun.hex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Caterina.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Caterina.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Descriptors.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Descriptors.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Esplora-prod-firmware-2012-12-10.hex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Esplora-prod-firmware-2012-12-10.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Leonardo-prod-firmware-2012-04-26.hex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Leonardo-prod-firmware-2012-04-26.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Leonardo-prod-firmware-2012-12-10.hex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Leonardo-prod-firmware-2012-12-10.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Micro-prod-firmware-2012-11-23.hex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Micro-prod-firmware-2012-11-23.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Micro-prod-firmware-2012-12-10.hex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\caterina\Micro-prod-firmware-2012-12-10.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\optiboot\boot.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\optiboot\optiboot.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\optiboot\optiboot_atmega168.hex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\optiboot\optiboot_atmega168.lst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\optiboot\optiboot_atmega328-Mini.hex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\optiboot\optiboot_atmega328.hex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\optiboot\optiboot_atmega328.lst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\optiboot\optiboot_atmega8.hex">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\optiboot\optiboot_atmega8.lst">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\optiboot\pin_defs.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\bootloaders\optiboot\stk500.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\libraries\Wire\keywords.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\libraries\Wire\library.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\libraries\Wire\TinyWireM.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\libraries\Wire\TinyWireM.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\libraries\Wire\USI_TWI_Master.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\libraries\Wire\USI_TWI_Master.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\libraries\Wire\utility\twi.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\libraries\Wire\utility\twi.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\libraries\Wire\Wire.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\libraries\Wire\Wire.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\adafruit\hardware\avr\1.4.13\variants\feather32u4\pins_arduino.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\Adafruit\pins_arduino.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\boards.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\abi.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\Arduino.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\binary.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\CDC.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\Client.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\HardwareSerial.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\HardwareSerial.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\HardwareSerial0.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\HardwareSerial1.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\HardwareSerial2.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\HardwareSerial3.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\HardwareSerial_private.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\hooks.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\IPAddress.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\IPAddress.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\main.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\new">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\new.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\new.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\PluggableUSB.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\PluggableUSB.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\Print.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\Print.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\Printable.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\Server.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\Stream.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\Stream.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\Tone.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\Udp.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\USBAPI.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\USBCore.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\USBCore.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\USBDesc.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\WCharacter.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\WInterrupts.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\wiring.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\wiring_analog.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\wiring_digital.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\wiring_private.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\wiring_pulse.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\wiring_pulse.S">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\wiring_shift.c">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\WMath.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\WString.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\cores\arduino\WString.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\platform.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\ArduinoCore-avr\programmers.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\Arduino\Arduino.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\Arduino\binary.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\Arduino\HardwareSerial.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\Arduino\HardwareSerial.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\Arduino\Print.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\Arduino\Print.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\Arduino\Printable.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\Arduino\Stream.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\Arduino\Stream.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\Arduino\USBAPI.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\Arduino\USBCore.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\Arduino\USBCore.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\Arduino\USBDesc.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\Arduino\WCharacter.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\Arduino\WString.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\Arduino\WString.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\GMR\Locomotive.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\GMR\Locomotive.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\GMR\Radio.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\GMR\Radio.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\GMR\TrainMotor.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\GMR\TrainMotor.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\RadioHead\LICENSE">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\RadioHead\RadioHead.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\RadioHead\RHGenericDriver.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\RadioHead\RHGenericDriver.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\RadioHead\RHGenericSPI.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\RadioHead\RHGenericSPI.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\RadioHead\RHHardwareSPI.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\RadioHead\RHHardwareSPI.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\RadioHead\RHSPIDriver.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\RadioHead\RHSPIDriver.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\RadioHead\RH_RF69.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\RadioHead\RH_RF69.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\SPI\SPI.cpp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\SPI\SPI.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
