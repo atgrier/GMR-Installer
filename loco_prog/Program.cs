@@ -143,13 +143,20 @@ namespace loco_prog
             header_mod = header_ref;
             foreach (KeyValuePair<string, string> parameter in parameters_mod)
                 header_mod = header_mod.Replace($"<{parameter.Key}>", parameter.Value);
-            Console.WriteLine(header_mod);
         }
 
         private void SaveSketch()
         {
-            File.WriteAllText($"loco_prog.libraries.sketch.{sketch_name}.ino", sketch);
-            File.WriteAllText($"loco_prog.libraries.sketch.{sketch_name}.h", header_mod);
+            string sketch_directory = @".\libraries\sketch\";
+            if (!Directory.Exists(sketch_directory))
+                Directory.CreateDirectory(sketch_directory);
+            File.WriteAllText(@$".\libraries\sketch\{sketch_name}.ino", sketch);
+            File.WriteAllText(@$".\libraries\sketch\{sketch_name}.h", header_mod);
+        }
+
+        private void SaveLibraries()
+        {
+
         }
 
         private void CompileSketch()
