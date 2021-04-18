@@ -1,0 +1,156 @@
+﻿GCC = "avr-gcc"
+GPP = "avr-g++"
+GCC_AR = "avr-gcc-ar"
+OBJ_COPY = "avr-objcopy"
+AVR_SIZE = "avr-size"
+CTAGS = "ctags"
+
+FLAGS_1 = -c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing
+FLAGS_2 = -flto -w -x c++ -E -GCC
+FLAGS_3 = -MMD -flto
+FLAGS_4 = -mmcu=atmega32u4 -DF_CPU=8000000L -DARDUINO=10813 -DARDUINO_AVR_FEATHER32U4 -DARDUINO_ARCH_AVR -DUSB_VID=0x239A -DUSB_PID=0x800C "-DUSB_MANUFACTURER=\"Adafruit\"" "-DUSB_PRODUCT=\"Feather 32u4\""
+FLAGS_5 = -c -g -Os -w -std=gnu11 -ffunction-sections -fdata-sections -MMD -flto -fno-fat-lto-objects
+FLAGS_6 = -c -g -x assembler-with-cpp
+PATHS = "-IC:.\\Arduino" "-IC:.\\Adafruit" "-IC:.\\GMR" "-IC:.\\RadioHead" "-IC:.\\SPI"
+
+# Detecting libraries used...
+
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\sketch\\receiver.ino.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\GMR\\Locomotive.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\GMR\\Radio.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\GMR\\TrainMotor.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHCRC.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHDatagram.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHEncryptedDriver.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHGenericDriver.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHGenericSPI.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHHardwareSPI.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHMesh.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHNRFSPIDriver.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHReliableDatagram.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHRouter.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHSPIDriver.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHSoftwareSPI.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_ASK.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_GCC110.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_E32.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_MRF89.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_NRF24.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_NRF51.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_NRF905.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_RF22.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_RF24.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_RF69.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_RF95.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_Serial.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_TCP.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\SPI\\SPI.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+
+Generating function prototypes...
+
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\sketch\\receiver.ino.cpp" -o ".\\..\\build\\preproc\\ctags_target_for_gGCC_minus_e.cpp" -DARDUINO_LIB_DISCOVERY_PHASE
+$(CTAGS) -u --language-force=c++ -f - --c++-kinds=svpf --fields=KSTtzns --line-directives ".\\..\\build\\preproc\\ctags_target_for_gGCC_minus_e.cpp"
+
+# Compiling sketch...
+
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\sketch\\receiver.ino.cpp" -o ".\\..\\build\\sketch\\receiver.ino.cpp.o"
+
+# Compiling libraries...
+# Compiling library "GMR"
+
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\GMR\\Locomotive.cpp" -o ".\\..\\build\\libraries\\GMR\\Locomotive.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\GMR\\Radio.cpp" -o ".\\..\\build\\libraries\\GMR\\Radio.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\GMR\\TrainMotor.cpp" -o ".\\..\\build\\libraries\\GMR\\TrainMotor.cpp.o"
+
+# Compiling library "RadioHead"
+
+# $(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHNRFSPIDriver.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RHNRFSPIDriver.cpp.o"
+# $(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_MRF89.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RH_MRF89.cpp.o"
+# $(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHEncryptedDriver.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RHEncryptedDriver.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHGenericDriver.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RHGenericDriver.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHHardwareSPI.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RHHardwareSPI.cpp.o"
+# $(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHRouter.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RHRouter.cpp.o"
+# $(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHMesh.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RHMesh.cpp.o"
+# $(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_GCC110.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RH_GCC110.cpp.o"
+# $(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_E32.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RH_E32.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHGenericSPI.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RHGenericSPI.cpp.o"
+# $(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_ASK.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RH_ASK.cpp.o"
+# $(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHReliableDatagram.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RHReliableDatagram.cpp.o"
+# $(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHDatagram.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RHDatagram.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHSPIDriver.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RHSPIDriver.cpp.o"
+# $\(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHSoftwareSPI.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RHSoftwareSPI.cpp.o"
+# $(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHCRC.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RHCRC.cpp.o"
+# $(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_NRF24.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RH_NRF24.cpp.o"
+# $(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_NRF51.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RH_NRF51.cpp.o"
+# $(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_NRF905.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RH_NRF905.cpp.o"
+# $(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_RF24.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RH_RF24.cpp.o"
+# $(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_RF22.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RH_RF22.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_RF69.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RH_RF69.cpp.o"
+# $(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_RF95.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RH_RF95.cpp.o"
+# $(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_Serial.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RH_Serial.cpp.o"
+# $(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_TCP.cpp" -o ".\\..\\build\\libraries\\RadioHead\\RH_TCP.cpp.o"
+
+# Compiling library "SPI"
+
+$\(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\SPI\\SPI.cpp" -o ".\\..\\build\\libraries\\SPI\\SPI.cpp.o"
+
+# Compiling core...
+
+$(GCC) $(FLAGS_6) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\Arduino\\wiring_pulse.S" -o ".\\..\\build\\core\\wiring_pulse.S.o"
+$(GCC) $(FLAGS_5) $(FLAGS_4) $(PATHS) ".\\Arduino\\wiring.c" -o ".\\..\\build\\core\\wiring.c.o"
+$(GCC) $(FLAGS_5) $(FLAGS_4) $(PATHS) ".\\Arduino\\wiring_analog.c" -o ".\\..\\build\\core\\wiring_analog.c.o"
+$(GCC) $(FLAGS_5) $(FLAGS_4) $(PATHS) ".\\Arduino\\WInterrupts.c" -o ".\\..\\build\\core\\WInterrupts.c.o"
+$(GCC) $(FLAGS_5) $(FLAGS_4) $(PATHS) ".\\Arduino\\hooks.c" -o ".\\..\\build\\core\\hooks.c.o"
+$(GCC) $(FLAGS_5) $(FLAGS_4) $(PATHS) ".\\Arduino\\wiring_pulse.c" -o ".\\..\\build\\core\\wiring_pulse.c.o"
+$(GCC) $(FLAGS_5) $(FLAGS_4) $(PATHS) ".\\Arduino\\wiring_digital.c" -o ".\\..\\build\\core\\wiring_digital.c.o"
+$(GCC) $(FLAGS_5) $(FLAGS_4) $(PATHS) ".\\Arduino\\wiring_shift.c" -o ".\\..\\build\\core\\wiring_shift.c.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\Arduino\\CDC.cpp" -o ".\\..\\build\\core\\CDC.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\Arduino\\HardwareSerial.cpp" -o ".\\..\\build\\core\\HardwareSerial.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\Arduino\\USBCore.cpp" -o ".\\..\\build\\core\\USBCore.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\Arduino\\Print.cpp" -o ".\\..\\build\\core\\Print.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\Arduino\\HardwareSerial2.cpp" -o ".\\..\\build\\core\\HardwareSerial2.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\Arduino\\IPAddress.cpp" -o ".\\..\\build\\core\\IPAddress.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\Arduino\\PluggableUSB.cpp" -o ".\\..\\build\\core\\PluggableUSB.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\Arduino\\main.cpp" -o ".\\..\\build\\core\\main.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\Arduino\\abi.cpp" -o ".\\..\\build\\core\\abi.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\Arduino\\Stream.cpp" -o ".\\..\\build\\core\\Stream.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\Arduino\\Tone.cpp" -o ".\\..\\build\\core\\Tone.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\Arduino\\WString.cpp" -o ".\\..\\build\\core\\WString.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\Arduino\\HardwareSerial3.cpp" -o ".\\..\\build\\core\\HardwareSerial3.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\Arduino\\HardwareSerial1.cpp" -o ".\\..\\build\\core\\HardwareSerial1.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\Arduino\\WMath.cpp" -o ".\\..\\build\\core\\WMath.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\Arduino\\HardwareSerial0.cpp" -o ".\\..\\build\\core\\HardwareSerial0.cpp.o"
+$(GPP) $(FLAGS_1) $(FLAGS_3) $(FLAGS_4) $(PATHS) ".\\Arduino\\new.cpp" -o ".\\..\\build\\core\\new.cpp.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\wiring_pulse.S.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\WInterrupts.c.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\hooks.c.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\wiring.c.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\wiring_analog.c.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\wiring_digital.c.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\wiring_pulse.c.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\wiring_shift.c.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\CDC.cpp.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\HardwareSerial.cpp.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\HardwareSerial0.cpp.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\HardwareSerial1.cpp.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\HardwareSerial2.cpp.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\HardwareSerial3.cpp.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\IPAddress.cpp.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\PluggableUSB.cpp.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\Print.cpp.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\Stream.cpp.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\Tone.cpp.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\USBCore.cpp.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\WMath.cpp.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\WString.cpp.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\abi.cpp.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\main.cpp.o"
+$(GCC_AR) rcs ".\\..\\build\\core\\core.a" ".\\..\\build\\core\\new.cpp.o"
+
+# Linking everything together...
+
+# $(GCC) -w -Os -g -flto -fuse-linker-plugin -Wl,--gc-sections -mmcu=atmega32u4 -o ".\\..\\build/receiver.ino.elf" ".\\..\\build\\sketch\\receiver.ino.cpp.o" ".\\..\\build\\libraries\\GMR\\Locomotive.cpp.o" ".\\..\\build\\libraries\\GMR\\Radio.cpp.o" ".\\..\\build\\libraries\\GMR\\TrainMotor.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RHCRC.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RHDatagram.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RHEncryptedDriver.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RHGenericDriver.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RHGenericSPI.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RHHardwareSPI.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RHMesh.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RHNRFSPIDriver.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RHReliableDatagram.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RHRouter.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RHSPIDriver.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RHSoftwareSPI.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RH_ASK.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RH_GCC110.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RH_E32.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RH_MRF89.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RH_NRF24.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RH_NRF51.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RH_NRF905.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RH_RF22.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RH_RF24.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RH_RF69.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RH_RF95.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RH_Serial.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RH_TCP.cpp.o" ".\\..\\build\\libraries\\SPI\\SPI.cpp.o" ".\\..\\build/..\\arduino_cache_896858\\core\\core_adafruit_avr_feather32u4_19692f64572ea0a99c4c4e9f4fd96903.a" "-L.\\..\\build" -lm
+$(GCC) -w -Os -g -flto -fuse-linker-plugin -Wl,--gc-sections -mmcu=atmega32u4 -o ".\\..\\build/receiver.ino.elf" ".\\..\\build\\sketch\\receiver.ino.cpp.o" ".\\..\\build\\libraries\\GMR\\Locomotive.cpp.o" ".\\..\\build\\libraries\\GMR\\Radio.cpp.o" ".\\..\\build\\libraries\\GMR\\TrainMotor.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RHGenericDriver.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RHGenericSPI.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RHHardwareSPI.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RHSPIDriver.cpp.o" ".\\..\\build\\libraries\\RadioHead\\RH_RF69.cpp.o" ".\\..\\build\\libraries\\SPI\\SPI.cpp.o" ".\\..\\build/..\\arduino_cache_896858\\core\\core_adafruit_avr_feather32u4_19692f64572ea0a99c4c4e9f4fd96903.a" "-L.\\..\\build" -lm
+$(OBJ_COPY) -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0 ".\\..\\build/receiver.ino.elf" ".\\..\\build/receiver.ino.eep"
+$(OBJ_COPY) -O ihex -R .eeprom ".\\..\\build/receiver.ino.elf" ".\\..\\build/receiver.ino.hex"
+$(AVR_SIZE) -A ".\\..\\build/receiver.ino.elf"
