@@ -11,42 +11,43 @@ FLAGS_3 = -MMD -flto
 FLAGS_4 = -mmcu=atmega32u4 -DF_CPU=8000000L -DARDUINO=10813 -DARDUINO_AVR_FEATHER32U4 -DARDUINO_ARCH_AVR -DUSB_VID=0x239A -DUSB_PID=0x800C "-DUSB_MANUFACTURER=\"Adafruit\"" "-DUSB_PRODUCT=\"Feather 32u4\""
 FLAGS_5 = -c -g -Os -w -std=gnu11 -ffunction-sections -fdata-sections -MMD -flto -fno-fat-lto-objects
 FLAGS_6 = -c -g -x assembler-with-cpp
+FLAGS_7 = -o nul -DARDUINO_LIB_DISCOVERY_PHASE
 PATHS = "-IC:.\\Arduino" "-IC:.\\Adafruit" "-IC:.\\GMR" "-IC:.\\RadioHead" "-IC:.\\SPI"
 
 # Detecting libraries used...
 
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\sketch\\receiver.ino.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\GMR\\Locomotive.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\GMR\\Radio.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\GMR\\TrainMotor.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHCRC.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHDatagram.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHEncryptedDriver.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHGenericDriver.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHGenericSPI.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHHardwareSPI.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHMesh.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHNRFSPIDriver.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHReliableDatagram.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHRouter.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHSPIDriver.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHSoftwareSPI.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_ASK.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_GCC110.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_E32.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_MRF89.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_NRF24.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_NRF51.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_NRF905.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_RF22.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_RF24.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_RF69.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_RF95.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_Serial.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_TCP.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
-$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\SPI\\SPI.cpp" -o nul -DARDUINO_LIB_DISCOVERY_PHASE
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\sketch\\receiver.ino.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\GMR\\Locomotive.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\GMR\\Radio.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\GMR\\TrainMotor.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHCRC.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHDatagram.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHEncryptedDriver.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHGenericDriver.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHGenericSPI.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHHardwareSPI.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHMesh.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHNRFSPIDriver.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHReliableDatagram.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHRouter.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHSPIDriver.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RHSoftwareSPI.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_ASK.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_GCC110.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_E32.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_MRF89.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_NRF24.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_NRF51.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_NRF905.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_RF22.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_RF24.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_RF69.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_RF95.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_Serial.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\RadioHead\\RH_TCP.cpp" $(FLAGS_7)
+$(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\SPI\\SPI.cpp" $(FLAGS_7)
 
-Generating function prototypes...
+# Generating function prototypes...
 
 $(GPP) $(FLAGS_1) $(FLAGS_2) $(FLAGS_4) $(PATHS) ".\\sketch\\receiver.ino.cpp" -o ".\\..\\build\\preproc\\ctags_target_for_gGCC_minus_e.cpp" -DARDUINO_LIB_DISCOVERY_PHASE
 # $(CTAGS) -u --language-force=c++ -f - --c++-kinds=svpf --fields=KSTtzns --line-directives ".\\..\\build\\preproc\\ctags_target_for_gGCC_minus_e.cpp"
