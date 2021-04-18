@@ -144,18 +144,23 @@ namespace loco_prog
             foreach (KeyValuePair<string, string> parameter in parameters_mod)
                 header_mod = header_mod.Replace($"<{parameter.Key}>", parameter.Value);
         }
+        
+        private void check_create_directory(string directory)
+        {
+            if (!Directory.Exists(directory))
+                Directory.CreateDirectory(directory);
+        }
 
         private void SaveSketch()
         {
-            string sketch_directory = @".\libraries\sketch\";
-            if (!Directory.Exists(sketch_directory))
-                Directory.CreateDirectory(sketch_directory);
+            check_create_directory(@".\libraries\sketch\");
             File.WriteAllText(@$".\libraries\sketch\{sketch_name}.ino", sketch);
             File.WriteAllText(@$".\libraries\sketch\{sketch_name}.h", header_mod);
         }
 
         private void CompileSketch()
         {
+            check_create_directory(@".\build\");
             Console.WriteLine("compiling file");
         }
 
