@@ -467,6 +467,21 @@
     <None Update="libraries\avr-gcc\bin\avr-size.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="libraries\avrdude\avrdude.conf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\avrdude\avrdude.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\avrdude\giveio.sys">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\avrdude\libusb0.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\avrdude\loaddrv.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="libraries\gcc\g++.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
