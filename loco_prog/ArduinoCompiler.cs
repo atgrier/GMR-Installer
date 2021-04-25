@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
+using System.Collections.Generic;
 
 namespace loco_prog
 {
@@ -7,11 +9,13 @@ namespace loco_prog
     {
         private static readonly string build_directory = ".\\build\\";
 
-        private static readonly string GCC = $"{library_directory}gcc\\avr-gcc";
-        private static readonly string GPP = $"{library_directory}gcc\\avr-g++";
-        private static readonly string GCC_AR = $"{library_directory}gcc\\avr-gcc-ar";
-        private static readonly string OBJ_COPY = $"{library_directory}gcc\\avr-objcopy";
-        private static readonly string SIZE = $"{library_directory}gcc\\avr-size";
+        private static Dictionary<string, string> AVR_GCC = new Dictionary<string, string>() {
+            {"avr-gcc" , "avr-gcc" },
+            {"avr-g++" , "avr-g++" },
+            {"avr-gcc-ar" , "avr-gcc-ar" },
+            {"avr-objcopy" , "avr-objcopy" },
+            {"avr-size" , "avr-size" }
+        };
 
         private static readonly string FLAGS_1 = "-c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing";
         private static readonly string FLAGS_2 = "-flto - w - x c++ -E -GCC";
@@ -21,71 +25,118 @@ namespace loco_prog
         private static readonly string FLAGS_6 = "-c - g - x assembler-with-cpp";
         private static readonly string FLAGS_7 = "-o nul -DARDUINO_LIB_DISCOVERY_PHASE";
 
-        private static readonly string PATHS = "\" - IC:.\\\\Arduino\" \"-IC:.\\\\Adafruit\" \"-IC:.\\\\GMR\" \"-IC:.\\\\RadioHead\" \"-IC:.\\\\SPI\"";
+        private static readonly string PATHS = $"\"-IC:{Path.GetFullPath(Path.Combine(".", "libraries", "Arduino"))}\" " +
+            $"\"-IC:{Path.GetFullPath(Path.Combine(".", "libraries", "Adafruit"))}\" " +
+            $"\"-IC:{Path.GetFullPath(Path.Combine(".", "libraries", "GMR"))}\" " +
+            $"\"-IC:{Path.GetFullPath(Path.Combine(".", "libraries", "RadioHead"))}\" " +
+            $"\"-IC:{Path.GetFullPath(Path.Combine(".", "libraries", "Arduino"))}\"";
+
+        private string file_sketch;
+        private static readonly string[] FILES_GMR = { Path.Combine("GMR", "Locomotive.cpp"),
+            Path.Combine("GMR", "Radio.cpp"), Path.Combine("GMR", "TrainMotor.cpp") };
+        private static readonly string[] FILES_RADIOHEAD = { Path.Combine("RadioHead", "RHGenericDriver.cpp"),
+            Path.Combine("RadioHead", "RHGenericSPI.cpp"), Path.Combine("RadioHead", "RHHardwareSPI.cpp"),
+            Path.Combine("RadioHead", "RHSPIDriver.cpp"), Path.Combine("RadioHead", "RH_RF69.cpp") };
+        private static readonly string[] FILES_SPI = { Path.Combine("SPI", "SPI.cpp") };
+        private static readonly string[] FILES_ARDUINO_1 = { "WInterrupts.c" };
+        private static readonly string[] FILES_ARDUINO_2 = { "HardwareSerial.cpp", "PluggableUSB.cpp", "Print.cpp",
+            "Stream.cpp", "USBCore.cpp", "WString.cpp" };
 
         private void CompileSketch()
         {
+            file_sketch = Path.Combine("sketch", $"{sketch_name}.ino.cpp");
             CheckCreateDirectory(build_directory);
-            Console.WriteLine("compiling file");
+
+            DetermineGCC();
+            DetectLibraries();
+            //GenerateFunctionPrototypes();
+            //CompileArduinoSketch();
+            //CompileLibraries();
+            //CompileCore();
+            //LinkComponents();
         }
+
+        private void DetermineGCC()
+        {
+            if (Path.GetFullPath("avr-gcc") != null)
+                return;
+
+            string[] prefix;
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                prefix = new[] { "windows", "exe" };
+            else if (Environment.OSVersion.Platform == PlatformID.Unix)
+                prefix = new[] { "linux", "sh" };
+            else if (Environment.OSVersion.Platform == PlatformID.MacOSX)
+                prefix = new[] { "linux", "sh" };
+            //prefix = ["osx", "sh"];
+            else
+                throw new PlatformNotSupportedException();
+
+            foreach (KeyValuePair<string, string> gcc_exec in AVR_GCC)
+                AVR_GCC[gcc_exec.Key] = Path.GetFullPath(Path.Combine(library_directory, "avr-gcc", prefix[0], "bin", $"{gcc_exec}.{prefix[1]}"));
+
+    }
 
         private void DetectLibraries()
-        {
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\sketch\\\\receiver.ino.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\GMR\\\\Locomotive.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\GMR\\\\Radio.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\GMR\\\\TrainMotor.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RHCRC.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RHDatagram.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RHEncryptedDriver.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RHGenericDriver.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RHGenericSPI.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RHHardwareSPI.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RHMesh.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RHNRFSPIDriver.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RHReliableDatagram.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RHRouter.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RHSPIDriver.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RHSoftwareSPI.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RH_ASK.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RH_GCC110.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RH_E32.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RH_MRF89.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RH_NRF24.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RH_NRF51.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RH_NRF905.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RH_RF22.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RH_RF24.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RH_RF69.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RH_RF95.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RH_Serial.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\RadioHead\\\\RH_TCP.cpp\" {FLAGS_7}");
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \".\\\\SPI\\\\SPI.cpp\" {FLAGS_7}");
-        }
+    {
+        Console.WriteLine(GPP);
+        Console.WriteLine(File.Exists(GPP));
+        Console.WriteLine(Path.GetFullPath(Path.Combine(library_directory, file_sketch)));
+        Console.WriteLine(File.Exists(Path.GetFullPath(Path.Combine(library_directory, file_sketch))));
+        Console.WriteLine($"{GPP} {FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \"{Path.GetFullPath(Path.Combine(library_directory, file_sketch))}\" {FLAGS_7}");
 
-        private void GenerateFunctionPrototypes()
-        {
+        Process.Start(GPP, $"{FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \"{Path.GetFullPath(Path.Combine(library_directory, file_sketch))}\" {FLAGS_7}");
 
-        }
+        foreach (string file in FILES_GMR)
+            Process.Start(GPP, $"{FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \"{library_directory}{file}\" {FLAGS_7}");
 
-        private void CompileArduinoSketch()
-        {
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_3} {FLAGS_4} {PATHS} \".\\\\sketch\\\\receiver.ino.cpp\" - o \".\\\\..\\\\build\\\\sketch\\\\receiver.ino.cpp.o\"");
-        }
+        foreach (string file in FILES_RADIOHEAD)
+            Process.Start(GPP, $"{FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \"{library_directory}{file}\" {FLAGS_7}");
 
-        private void CompileLibraries()
-        {
-
-        }
-
-        private void CompileCore()
-        {
-
-        }
-
-        private void LinkComponents()
-        {
-
-        }
+        foreach (string file in FILES_SPI)
+            Process.Start(GPP, $"{FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \"{library_directory}{file}\" {FLAGS_7}");
     }
+
+    private void GenerateFunctionPrototypes()
+    {
+
+    }
+
+    private void CompileArduinoSketch()
+    {
+        Process.Start($"{GPP} {FLAGS_1} {FLAGS_3} {FLAGS_4} {PATHS} \"{library_directory}{file_sketch}\" - o \"{build_directory}{file_sketch}.o\"");
+    }
+
+    private void CompileLibraries()
+    {
+        foreach (string file in FILES_GMR)
+            Process.Start($"{GPP} {FLAGS_1} {FLAGS_3} {FLAGS_4} {PATHS} \"{library_directory}{file}\" -o \"{build_directory}{file}.o\"");
+
+        foreach (string file in FILES_RADIOHEAD)
+            Process.Start($"{GPP} {FLAGS_1} {FLAGS_3} {FLAGS_4} {PATHS} \"{library_directory}{file}\" -o \"{build_directory}{file}.o\"");
+
+        foreach (string file in FILES_SPI)
+            Process.Start($"{GPP} {FLAGS_1} {FLAGS_3} {FLAGS_4} {PATHS} \"{library_directory}{file}\" -o \"{build_directory}{file}.o\"");
+    }
+
+    private void CompileCore()
+    {
+        foreach (string file in FILES_ARDUINO_1)
+            Process.Start($"{GCC} {FLAGS_5} {FLAGS_4} {PATHS} \"{library_directory}Arduino\\{file}\" -o \"{build_directory}core{file}.o\"");
+
+        foreach (string file in FILES_ARDUINO_2)
+            Process.Start($"{GPP} {FLAGS_1} {FLAGS_3} {FLAGS_4} {PATHS} \"{library_directory}Arduino\\{file}\" -o \"{build_directory}core{file}.o\"");
+
+        foreach (string file in FILES_ARDUINO_1)
+            Process.Start($"{GCC_AR} rcs \"{build_directory}core\\core.a\" \"{build_directory}core\\{file}.o\"");
+
+        foreach (string file in FILES_ARDUINO_2)
+            Process.Start($"{GCC_AR} rcs \"{build_directory}core\\core.a\" \"{build_directory}core\\{file}.o\"");
+    }
+
+    private void LinkComponents()
+    {
+
+    }
+}
 }

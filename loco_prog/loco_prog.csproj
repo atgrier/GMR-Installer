@@ -335,16 +335,10 @@
     <None Update="libraries\ArduinoCore-avr\programmers.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="libraries\Arduino\abi.cpp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="libraries\Arduino\Arduino.h">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="libraries\Arduino\binary.h">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="libraries\Arduino\CDC.cpp">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="libraries\Arduino\HardwareSerial.cpp">
@@ -353,34 +347,7 @@
     <None Update="libraries\Arduino\HardwareSerial.h">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="libraries\Arduino\HardwareSerial0.cpp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="libraries\Arduino\HardwareSerial1.cpp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="libraries\Arduino\HardwareSerial2.cpp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="libraries\Arduino\HardwareSerial3.cpp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="libraries\Arduino\hooks.c">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="libraries\Arduino\IPAddress.cpp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="libraries\Arduino\IPAddress.h">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="libraries\Arduino\main.cpp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="libraries\Arduino\new.cpp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="libraries\Arduino\new.h">
+    <None Update="libraries\Arduino\HardwareSerial_private.h">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="libraries\Arduino\PluggableUSB.cpp">
@@ -404,9 +371,6 @@
     <None Update="libraries\Arduino\Stream.h">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="libraries\Arduino\Tone.cpp">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="libraries\Arduino\USBAPI.h">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -425,25 +389,7 @@
     <None Update="libraries\Arduino\WInterrupts.c">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="libraries\Arduino\wiring.c">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="libraries\Arduino\wiring_analog.c">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="libraries\Arduino\wiring_digital.c">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="libraries\Arduino\wiring_pulse.c">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="libraries\Arduino\wiring_pulse.S">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="libraries\Arduino\wiring_shift.c">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="libraries\Arduino\WMath.cpp">
+    <None Update="libraries\Arduino\wiring_private.h">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="libraries\Arduino\WString.cpp">
@@ -465,6 +411,21 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="libraries\avr-gcc\bin\avr-size.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\avr-gcc\windows\bin\avr-g++.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\avr-gcc\windows\bin\avr-gcc-ar.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\avr-gcc\windows\bin\avr-gcc.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\avr-gcc\windows\bin\avr-objcopy.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="libraries\avr-gcc\windows\bin\avr-size.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="libraries\avrdude\avrdude.conf">

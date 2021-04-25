@@ -8,7 +8,7 @@ namespace loco_prog
 {
     public partial class ArduinoSketch
     {
-        private static readonly string library_directory = ".\\libraries\\";
+        private static readonly string library_directory = Path.Combine(".", "libraries");
         private readonly string sketch_name;
 
         private string sketch;
@@ -16,7 +16,7 @@ namespace loco_prog
         private string parameters_ref;
 
         private string header_mod;
-        private Dictionary<string, string> parameters_mod = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> parameters_mod = new Dictionary<string, string>();
 
         public ArduinoSketch(string name)
         {
@@ -34,7 +34,7 @@ namespace loco_prog
         {
             var assembly = Assembly.GetExecutingAssembly();
             using Stream stream = assembly.GetManifestResourceStream(
-                $"loco_prog.main_scripts.{ sketch_name}.{sketch_name}.{extension}");
+                $"loco_prog.main_scripts.{sketch_name}.{sketch_name}.{extension}");
             using StreamReader reader = new StreamReader(stream);
             return reader.ReadToEnd();
         }
@@ -118,9 +118,10 @@ namespace loco_prog
 
         private void SaveSketch()
         {
-            CheckCreateDirectory($"{library_directory}sketch\\");
-            File.WriteAllText($"{library_directory}sketch\\{sketch_name}.ino", sketch);
-            File.WriteAllText($"{library_directory}\\sketch\\{sketch_name}.h", header_mod);
+            string sketch_path = Path.Combine(library_directory, "sketch");
+            CheckCreateDirectory(sketch_path);
+            File.WriteAllText(Path.Combine(sketch_path, $"{sketch_name}.ino.cpp"), sketch);
+            File.WriteAllText(Path.Combine(sketch_path, $"{sketch_name}.h"), header_mod);
         }
 
         private void UploadSketch()
