@@ -39,10 +39,13 @@ namespace loco_prog
         private static readonly string FLAGS_5 = "-c -g -Os -w -std=gnu11 -ffunction-sections -fdata-sections -MMD -flto -fno-fat-lto-objects";
         private static readonly string FLAGS_6 = "-c - g - x assembler-with-cpp";
         private static readonly string FLAGS_7 = "-o nul -DARDUINO_LIB_DISCOVERY_PHASE";
+        private static readonly string FLAGS_8 = "-w -Os -g -flto -fuse-linker-plugin -Wl,--gc-sections -mmcu=atmega32u4";
 
         private string PATHS = "";
 
         private string file_sketch;
+        private string sketch_path;
+        private string output_path;
 
         private static readonly string[] FILES_GMR = { Path.Join("GMR", "Locomotive.cpp"),
             Path.Join("GMR", "Radio.cpp"), Path.Join("GMR", "TrainMotor.cpp") };
@@ -60,25 +63,42 @@ namespace loco_prog
         private void CompileSketch()
         {
             file_sketch = Path.Join("sketch", $"{sketch_name}.ino.cpp");
-            CheckCreateDirectory(build_directory);
+            sketch_path = Path.GetFullPath(Path.Join(library_directory, file_sketch));
+            output_path = Path.GetFullPath(Path.Join(build_directory, file_sketch));
+            Directory.Delete(Path.GetFullPath(Path.Join(build_directory)), true);
+            CheckCreateDirectory(Path.GetFullPath(Path.Join(build_directory, "sketch")));
 
             SetPaths();
             AddGCCToPath();
 
+            Console.WriteLine("Compiling...");
             DetectLibraries();
             //GenerateFunctionPrototypes();
-            //CompileArduinoSketch();
-            //CompileLibraries();
-            //CompileCore();
-            //LinkComponents();
+            CompileArduinoSketch();
+            CompileLibraries();
+            CompileCore();
+            LinkComponents();
+        }
+
+        private void RunProcess(string exec, string args)
+        {
+            Process process = new Process()
+            {
+                StartInfo = new ProcessStartInfo()
+                {
+                    FileName = exec,
+                    Arguments = args
+                }
+            };
+            process.Start();
+            process.WaitForExit();
         }
 
         private void SetPaths()
         {
-            foreach (string path in new[] { "arduino", "Adafruit", "GMR", "RadioHead", "SPI" })
-                PATHS = string.Concat(PATHS, $"\"-IC:{Path.GetFullPath(Path.Join(".", "libraries", path))}\" ");
+            foreach (string path in new[] { "Arduino", "Adafruit", "GMR", "RadioHead", "SPI" })
+                PATHS = string.Concat(PATHS, $"\"-I{Path.GetFullPath(Path.Join(".", "libraries", path))}\" ");
             PATHS = PATHS.Remove(PATHS.Length - 1, 1);
-            Console.WriteLine(PATHS);
         }
 
         // https://stackoverflow.com/a/3856090
@@ -145,47 +165,78 @@ namespace loco_prog
 
         private void DetectLibraries()
         {
-            Process.Start(GPP, $"{FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \"{Path.GetFullPath(Path.Join(library_directory, file_sketch))}\" {FLAGS_7}");
+            RunProcess(GPP, $"{FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \"{sketch_path}\" {FLAGS_7}");
 
-            // now I'm getting arduino import issues
             foreach (string[] files in FILES_LIBRARY)
                 foreach (string file in files)
-                    Process.Start(GPP, $"{FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \"{Path.Join(library_directory, file)}\" {FLAGS_7}");
+                    RunProcess(GPP, $"{FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \"{Path.Join(library_directory, file)}\" {FLAGS_7}");
         }
 
         private void GenerateFunctionPrototypes()
         {
-
+            Directory.CreateDirectory(Path.GetFullPath(Path.Join(build_directory, "preproc")));
+            string fproto_output = Path.GetFullPath(Path.Join(build_directory, "preproc", "ctags_target_for_gGCC_minus_e.cpp"));
+            RunProcess(GPP, $"{FLAGS_1} {FLAGS_2} {FLAGS_4} {PATHS} \"{sketch_path}\" -o \"{fproto_output}\" -DARDUINO_LIB_DISCOVERY_PHASE");
         }
 
         private void CompileArduinoSketch()
         {
-            Process.Start($"{GPP} {FLAGS_1} {FLAGS_3} {FLAGS_4} {PATHS} \"{library_directory}{file_sketch}\" - o \"{build_directory}{file_sketch}.o\"");
+            RunProcess(GPP, $"{FLAGS_1} {FLAGS_3} {FLAGS_4} {PATHS} \"{sketch_path}\" -o \"{output_path}.o\"");
         }
 
         private void CompileLibraries()
         {
+            foreach (string path in new string[] { "GMR", "RadioHead", "SPI" })
+                Directory.CreateDirectory(Path.GetFullPath(Path.Join(build_directory, path)));
+
             foreach (string[] files in FILES_LIBRARY)
                 foreach (string file in files)
-                    Process.Start($"{GPP} {FLAGS_1} {FLAGS_3} {FLAGS_4} {PATHS} \"{library_directory}{file}\" -o \"{build_directory}{file}.o\"");
+                {
+                    string library_path = Path.GetFullPath(Path.Join(library_directory, file));
+                    string library_out = Path.GetFullPath(Path.Join(build_directory, $"{file}.o"));
+                    RunProcess(GPP, $"{FLAGS_1} {FLAGS_3} {FLAGS_4} {PATHS} \"{library_path}\" -o \"{library_out}\"");
+                }
         }
 
         private void CompileCore()
         {
+            Directory.CreateDirectory(Path.GetFullPath(Path.Join(build_directory, "core")));
+
             foreach (string file in FILES_ARDUINO_1)
-                Process.Start($"{GCC} {FLAGS_5} {FLAGS_4} {PATHS} \"{library_directory}Arduino\\{file}\" -o \"{build_directory}core{file}.o\"");
+            {
+                string core_path = Path.GetFullPath(Path.Join(library_directory, "Arduino", file));
+                string core_out = Path.GetFullPath(Path.Join(build_directory, "core", $"{file}.o"));
+                RunProcess(GCC, $"{FLAGS_5} {FLAGS_4} {PATHS} \"{core_path}\" -o \"{core_out}\"");
+            }
 
             foreach (string file in FILES_ARDUINO_2)
-                Process.Start($"{GPP} {FLAGS_1} {FLAGS_3} {FLAGS_4} {PATHS} \"{library_directory}Arduino\\{file}\" -o \"{build_directory}core{file}.o\"");
+            {
+                string core_path = Path.GetFullPath(Path.Join(library_directory, "Arduino", file));
+                string core_out = Path.GetFullPath(Path.Join(build_directory, "core", $"{file}.o"));
+                RunProcess(GPP, $"{FLAGS_1} {FLAGS_3} {FLAGS_4} {PATHS} \"{core_path}\" -o \"{core_out}\"");
+            }
 
             foreach (string[] files in new[] { FILES_ARDUINO_1, FILES_ARDUINO_2 })
                 foreach (string file in files)
-                    Process.Start($"{GCC_AR} rcs \"{build_directory}core\\core.a\" \"{build_directory}core\\{file}.o\"");
+                {
+                    string core_path = Path.GetFullPath(Path.Join(build_directory, "core", "core.a"));
+                    string core_out = Path.GetFullPath(Path.Join(build_directory, "core", $"{file}.o"));
+                    //RunProcess(GCC_AR);
+                    RunProcess(GCC_AR, $"rcs \"{core_path}\" \"{core_out}\"");
+                }
         }
 
         private void LinkComponents()
         {
-
+            string elf_out = Path.GetFullPath(Path.Join(build_directory, $"{sketch_name}.ino.elf"));
+            string build_path = Path.GetFullPath(build_directory);
+            string paths = $"\"{Path.GetFullPath(Path.Join(build_directory, $"{file_sketch}.o"))}\"";
+            foreach (string[] files in FILES_LIBRARY)
+                foreach (string file in files)
+                    paths = string.Concat(paths, $" \"{Path.GetFullPath(Path.Join(build_directory, $"{file}.o"))}\"");
+            paths = string.Concat(paths, $" \"{Path.GetFullPath(Path.Join(build_directory, "core", "core.a"))}\"");
+            //Console.WriteLine(paths);
+            RunProcess(GCC, $"{FLAGS_8} -o \"{elf_out}\" {paths} \"-L{build_path}\" -lm");
         }
     }
 }

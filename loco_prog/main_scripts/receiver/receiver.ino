@@ -5,6 +5,41 @@
 
 #include "receiver.h"
 
+void shutdown()
+{
+    locomotive.disable(true);
+    light_cab.Off();
+    while (1)
+        ;
+}
+
+void readBatteryVoltage()
+{
+    if (analogRead(PIN_BATTERY) < BATTERY_THRESHOLD)
+        shutdown();
+}
+
+void throttle(uint8_t* command)
+{
+    int spd = (int)command[1];
+    int dir = (int)command[2] == 1 ? 1 : -1;
+
+    // Serial.println("");
+    // Serial.print(spd);
+    // Serial.print(" ");
+    // Serial.println(dir);
+    // Serial.println(spd * dir);
+    if (spd == -1)
+        locomotive.disable(true);
+    else
+        locomotive.setSpeed(spd * dir);
+}
+
+void function(uint8_t* command)
+{
+    0;
+}
+
 void setup()
 {
   Serial.begin(115200); // configure serial interface
@@ -61,39 +96,4 @@ void loop()
 
   if (millis() - timer_disable > 500)
     locomotive.disable();
-}
-
-void readBatteryVoltage()
-{
-  if (analogRead(PIN_BATTERY) < BATTERY_THRESHOLD)
-    shutdown();
-}
-
-void shutdown()
-{
-  locomotive.disable(true);
-  light_cab.Off();
-  while (1)
-    ;
-}
-
-void throttle(uint8_t *command)
-{
-  int spd = (int)command[1];
-  int dir = (int)command[2] == 1 ? 1 : -1;
-
-  // Serial.println("");
-  // Serial.print(spd);
-  // Serial.print(" ");
-  // Serial.println(dir);
-  // Serial.println(spd * dir);
-  if (spd == -1)
-    locomotive.disable(true);
-  else
-    locomotive.setSpeed(spd * dir);
-}
-
-void function(uint8_t *command)
-{
-  0;
 }

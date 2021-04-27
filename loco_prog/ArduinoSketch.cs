@@ -8,7 +8,7 @@ namespace loco_prog
 {
     public partial class ArduinoSketch
     {
-        private static readonly string library_directory = Path.Combine(".", "libraries");
+        private static readonly string library_directory = Path.Join(".", "libraries");
         private readonly string sketch_name;
 
         private string sketch;
@@ -112,16 +112,16 @@ namespace loco_prog
 
         private void CheckCreateDirectory(string directory)
         {
-            if (!Directory.Exists(directory))
-                Directory.CreateDirectory(directory);
+            if (!Directory.Exists(Path.GetFullPath(directory)))
+                Directory.CreateDirectory(Path.GetFullPath(directory));
         }
 
         private void SaveSketch()
         {
-            string sketch_path = Path.Combine(library_directory, "sketch");
+            string sketch_path = Path.Join(library_directory, "sketch");
             CheckCreateDirectory(sketch_path);
-            File.WriteAllText(Path.Combine(sketch_path, $"{sketch_name}.ino.cpp"), sketch);
-            File.WriteAllText(Path.Combine(sketch_path, $"{sketch_name}.h"), header_mod);
+            File.WriteAllText(Path.GetFullPath(Path.Join(sketch_path, $"{sketch_name}.ino.cpp")), sketch);
+            File.WriteAllText(Path.GetFullPath(Path.Join(sketch_path, $"{sketch_name}.h")), header_mod);
         }
 
         private void UploadSketch()
