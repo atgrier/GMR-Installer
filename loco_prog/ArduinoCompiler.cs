@@ -73,7 +73,6 @@ namespace loco_prog
 
             Console.WriteLine("Compiling...");
             DetectLibraries();
-            //GenerateFunctionPrototypes();
             CompileArduinoSketch();
             CompileLibraries();
             CompileCore();
@@ -166,6 +165,7 @@ namespace loco_prog
                     RunProcess(GPP, $"{FLAGS_1} {FLAGS_2} {FLAGS_4} {search_paths} \"{Path.Join(LIBRARY_DIRECTORY, files[i])}\" {FLAGS_7}");
         }
 
+        // This one doesn't seem to be needed.
         private void GenerateFunctionPrototypes()
         {
             CheckCreateDirectory(Path.Join(BUILD_DIRECTORY, "preproc"));
