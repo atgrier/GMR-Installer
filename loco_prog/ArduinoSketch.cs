@@ -8,15 +8,15 @@ namespace loco_prog
 {
     public partial class ArduinoSketch
     {
-        private static readonly string library_directory = Path.Join(".", "libraries");
+        private static readonly string LIBRARY_DIRECTORY = Path.GetFullPath(Path.Join(".", "libraries"));
+
         private readonly string sketch_name;
+        private string sketch_contents;
+        private string header_reference;
+        private string parameters_contents;
 
-        private string sketch;
-        private string header_ref;
-        private string parameters_ref;
-
-        private string header_mod;
-        private readonly Dictionary<string, string> parameters_mod = new Dictionary<string, string>();
+        private string header_modified;
+        private readonly Dictionary<string, string> parameters = new Dictionary<string, string>();
 
         public ArduinoSketch(string name)
         {
@@ -33,17 +33,28 @@ namespace loco_prog
         private string ReadFile(string extension)
         {
             var assembly = Assembly.GetExecutingAssembly();
-            using Stream stream = assembly.GetManifestResourceStream(
-                $"loco_prog.main_scripts.{sketch_name}.{sketch_name}.{extension}");
+            using Stream stream = assembly.GetManifestResourceStream($"loco_prog.main_scripts.{sketch_name}.{sketch_name}.{extension}");
             using StreamReader reader = new StreamReader(stream);
             return reader.ReadToEnd();
         }
 
         private void ReadSketch()
         {
-            sketch = ReadFile("ino");
-            header_ref = ReadFile("h");
-            parameters_ref = ReadFile("xml");
+            sketch_contents = ReadFile("ino");
+            header_reference = ReadFile("h");
+            parameters_contents = ReadFile("xml");
+        }
+
+        private string Filename(string name, string extension)
+        {
+            return string.Concat(name, ".", extension);
+        }
+
+        private void CheckCreateDirectory(string directory)
+        {
+            if (Directory.Exists(directory))
+                Directory.Delete(directory, true);
+            Directory.CreateDirectory(directory);
         }
 
         private string GetChange(XmlNode xmlNode)
@@ -97,33 +108,25 @@ namespace loco_prog
         private void GetChanges()
         {
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.LoadXml(parameters_ref);
+            xmlDoc.LoadXml(parameters_contents);
             XmlNodeList parentNode = xmlDoc.SelectNodes("parameters/item");
             foreach (XmlNode childNode in parentNode)
-                parameters_mod[childNode.SelectSingleNode("name").InnerText] = GetChange(childNode);
+                parameters[childNode.SelectSingleNode("name").InnerText] = GetChange(childNode);
         }
 
         private void MakeChanges()
         {
-            header_mod = header_ref;
-            foreach (KeyValuePair<string, string> parameter in parameters_mod)
-                header_mod = header_mod.Replace($"<{parameter.Key}>", parameter.Value);
-        }
-
-        private void CheckCreateDirectory(string directory)
-        {
-            string the_directory = Path.GetFullPath(directory);
-            if (Directory.Exists(the_directory))
-                Directory.Delete(the_directory, true);
-            Directory.CreateDirectory(the_directory);
+            header_modified = header_reference;
+            foreach (KeyValuePair<string, string> parameter in parameters)
+                header_modified = header_modified.Replace($"<{parameter.Key}>", parameter.Value);
         }
 
         private void SaveSketch()
         {
-            string sketch_path = Path.Join(library_directory, "sketch");
+            string sketch_path = Path.Join(LIBRARY_DIRECTORY, "sketch");
             CheckCreateDirectory(sketch_path);
-            File.WriteAllText(Path.GetFullPath(Path.Join(sketch_path, $"{sketch_name}.ino.cpp")), sketch);
-            File.WriteAllText(Path.GetFullPath(Path.Join(sketch_path, $"{sketch_name}.h")), header_mod);
+            File.WriteAllText(Path.Join(sketch_path, Filename(sketch_name, "ino.cpp")), sketch_contents);
+            File.WriteAllText(Path.Join(sketch_path, Filename(sketch_name, "h")), header_modified);
         }
 
         private void UploadSketch()
