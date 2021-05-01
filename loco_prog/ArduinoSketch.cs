@@ -112,8 +112,10 @@ namespace loco_prog
 
         private void CheckCreateDirectory(string directory)
         {
-            if (!Directory.Exists(Path.GetFullPath(directory)))
-                Directory.CreateDirectory(Path.GetFullPath(directory));
+            string the_directory = Path.GetFullPath(directory);
+            if (Directory.Exists(the_directory))
+                Directory.Delete(the_directory, true);
+            Directory.CreateDirectory(the_directory);
         }
 
         private void SaveSketch()
