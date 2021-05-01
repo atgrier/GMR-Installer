@@ -22,7 +22,7 @@ namespace loco_prog
         private string GPP = "avr-g++";
         private string GCC_AR = "avr-gcc-ar";
         private string OBJCOPY = "avr-objcopy";
-        private string GCC_SIZE = "avr-size";
+        private string AVR_SIZE = "avr-size";
         private string CTAGS = "CTAGS";
 
         private static readonly string FLAGS_1 = "-c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing";
@@ -34,6 +34,8 @@ namespace loco_prog
         private static readonly string FLAGS_7 = "-o nul -DARDUINO_LIB_DISCOVERY_PHASE";
         private static readonly string FLAGS_8 = "-w -Os -g -flto -fuse-linker-plugin -Wl,--gc-sections -mmcu=atmega32u4 -include Arduino.h";
         private static readonly string FLAGS_9 = "-u --language-force=c++ -f - --c++-kinds=svpf --fields=KSTtzns --line-directives";
+        private static readonly string FLAGS_10 = "-O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0";
+        private static readonly string FLAGS_11 = "-O ihex -R .eeprom";
 
         private string SEARCH_PATHS = "";
 
@@ -236,6 +238,12 @@ namespace loco_prog
                     paths = string.Join(' ', paths, $"\"{Path.Join(BUILD_DIRECTORY, Filename(FILES_LIBRARY[j][i], "o"))}\"");
             paths = string.Join(' ', paths, $"\"{Path.Join(BUILD_DIRECTORY, "core", "core.a")}\"");
             RunProcess(GCC, $"{FLAGS_8} -o \"{elf_out}\" {paths} \"-L{BUILD_DIRECTORY}\" -lm");
+
+            string eep_out = Path.Join(BUILD_DIRECTORY, Filename(sketch_name, "ino.eep"));
+            RunProcess(OBJCOPY, $"{FLAGS_10} \"{elf_out}\" \"{eep_out}\"");
+
+            string hex_out = Path.Join(BUILD_DIRECTORY, Filename(sketch_name, "ino.hex"));
+            RunProcess(OBJCOPY, $"{FLAGS_11} \"{elf_out}\" \"{hex_out}\"");
         }
     }
 }
