@@ -9,21 +9,21 @@ namespace loco_prog
     {
         private static readonly string BUILD_DIRECTORY = Path.GetFullPath(Path.Join(".", "build", ""));
 
-        private static string[] ARDUINO15_PATHS =
+        private static readonly string[] ARDUINO15_PATHS =
         {
             Path.Join("C:", "", "Users", Environment.UserName, "AppData", "Local", "Arduino15"),
             Path.Join("C:", "", "Users", Environment.UserName, "Documents", "ArduinoData", "packages"),
             Path.Join("", "Users", Environment.UserName, "Library", "Arduino15"),
             Path.Join("~", ".arduino15")
         };
-        private static string GCC_PATH_RELATIVE = Path.Join("packages", "arduino", "tools", "avr-gcc", "7.3.0-atmel3.6.1-arduino7", "bin");
+        private static readonly string GCC_PATH_RELATIVE = Path.Join("packages", "arduino", "tools", "avr-gcc", "7.3.0-atmel3.6.1-arduino7", "bin");
 
-        private string GCC = "avr-gcc";
-        private string GPP = "avr-g++";
-        private string GCC_AR = "avr-gcc-ar";
-        private string OBJCOPY = "avr-objcopy";
-        private string AVR_SIZE = "avr-size";
-        private string CTAGS = "CTAGS";
+        private static readonly string GCC = "avr-gcc";
+        private static readonly string GPP = "avr-g++";
+        private static readonly string GCC_AR = "avr-gcc-ar";
+        private static readonly string OBJCOPY = "avr-objcopy";
+        private static readonly string AVR_SIZE = "avr-size";
+        private static readonly string CTAGS = "CTAGS";
 
         private static readonly string FLAGS_1 = "-c -g -Os -w -std=gnu++11 -fpermissive -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -Wno-error=narrowing";
         private static readonly string FLAGS_2 = "-flto -w -x c++ -E -CC";
@@ -37,7 +37,6 @@ namespace loco_prog
         private static readonly string FLAGS_10 = "-O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0";
         private static readonly string FLAGS_11 = "-O ihex -R .eeprom";
 
-        private string SEARCH_PATHS = "";
 
         private static readonly string[] FILES_GMR = { Path.Join("GMR", "Locomotive.cpp"),
             Path.Join("GMR", "Radio.cpp"), Path.Join("GMR", "TrainMotor.cpp") };
@@ -57,6 +56,7 @@ namespace loco_prog
             "HardwareSerial2.cpp", "main.cpp", "IPAddress.cpp", "USBCore.cpp", "abi.cpp", "HardwareSerial1.cpp",
             "HardwareSerial3.cpp", "WMath.cpp", "WString.cpp", "Print.cpp", "PluggableUSB.cpp", "Stream.cpp", "new.cpp" };
 
+        private string search_paths;
         private string file_sketch;
         private string sketch_path;
         private string output_path;
@@ -100,7 +100,7 @@ namespace loco_prog
             string[] path_list = new string[LIBRARY_NAMES.Length];
             for (int i = 0; i < LIBRARY_NAMES.Length; i++)
                 path_list[i] = $"\"-I{Path.GetFullPath(Path.Join(".", "libraries", LIBRARY_NAMES[i]))}\"";
-            SEARCH_PATHS = string.Join(' ', path_list);
+            search_paths = string.Join(' ', path_list);
         }
 
         // https://stackoverflow.com/a/3856090
@@ -159,24 +159,24 @@ namespace loco_prog
 
         private void DetectLibraries()
         {
-            RunProcess(GPP, $"{FLAGS_1} {FLAGS_2} {FLAGS_4} {SEARCH_PATHS} \"{sketch_path}\" {FLAGS_7}");
+            RunProcess(GPP, $"{FLAGS_1} {FLAGS_2} {FLAGS_4} {search_paths} \"{sketch_path}\" {FLAGS_7}");
 
             foreach (string[] files in FILES_LIBRARY)
                 for (int i = 0; i < files.Length; i++)
-                    RunProcess(GPP, $"{FLAGS_1} {FLAGS_2} {FLAGS_4} {SEARCH_PATHS} \"{Path.Join(LIBRARY_DIRECTORY, files[i])}\" {FLAGS_7}");
+                    RunProcess(GPP, $"{FLAGS_1} {FLAGS_2} {FLAGS_4} {search_paths} \"{Path.Join(LIBRARY_DIRECTORY, files[i])}\" {FLAGS_7}");
         }
 
         private void GenerateFunctionPrototypes()
         {
             CheckCreateDirectory(Path.Join(BUILD_DIRECTORY, "preproc"));
             string fproto_output = Path.Join(BUILD_DIRECTORY, "preproc", "ctags_target_for_gcc_minus_e.cpp");
-            RunProcess(GPP, $"{FLAGS_1} {FLAGS_2} {FLAGS_4} {SEARCH_PATHS} \"{sketch_path}\" -o \"{fproto_output}\" -DARDUINO_LIB_DISCOVERY_PHASE");
+            RunProcess(GPP, $"{FLAGS_1} {FLAGS_2} {FLAGS_4} {search_paths} \"{sketch_path}\" -o \"{fproto_output}\" -DARDUINO_LIB_DISCOVERY_PHASE");
             RunProcess(CTAGS, $"{FLAGS_9} \"{fproto_output}\"");
         }
 
         private void CompileArduinoSketch()
         {
-            RunProcess(GPP, $"{FLAGS_1} {FLAGS_3} {FLAGS_4} {SEARCH_PATHS} \"{sketch_path}\" -o \"{output_path}.o\"");
+            RunProcess(GPP, $"{FLAGS_1} {FLAGS_3} {FLAGS_4} {search_paths} \"{sketch_path}\" -o \"{output_path}.o\"");
         }
 
         private void CompileLibraries()
@@ -189,7 +189,7 @@ namespace loco_prog
                 {
                     string library_path = Path.Join(LIBRARY_DIRECTORY, FILES_LIBRARY[j][i]);
                     string library_out = Path.Join(BUILD_DIRECTORY, Filename(FILES_LIBRARY[j][i], "o"));
-                    RunProcess(GPP, $"{FLAGS_1} {FLAGS_3} {FLAGS_4} {SEARCH_PATHS} \"{library_path}\" -o \"{library_out}\"");
+                    RunProcess(GPP, $"{FLAGS_1} {FLAGS_3} {FLAGS_4} {search_paths} \"{library_path}\" -o \"{library_out}\"");
                 }
         }
 
@@ -203,21 +203,21 @@ namespace loco_prog
             {
                 core_path = Path.Join(LIBRARY_DIRECTORY, "Arduino", FILES_ARDUINO_0[i]);
                 core_out = Path.Join(BUILD_DIRECTORY, "core", Filename(FILES_ARDUINO_0[i], "o"));
-                RunProcess(GCC, $"{FLAGS_6} {FLAGS_4} {SEARCH_PATHS} \"{core_path}\" -o \"{core_out}\"");
+                RunProcess(GCC, $"{FLAGS_6} {FLAGS_4} {search_paths} \"{core_path}\" -o \"{core_out}\"");
             }
 
             for (int i = 0; i < FILES_ARDUINO_1.Length; i++)
             {
                 core_path = Path.Join(LIBRARY_DIRECTORY, "Arduino", FILES_ARDUINO_1[i]);
                 core_out = Path.Join(BUILD_DIRECTORY, "core", Filename(FILES_ARDUINO_1[i], "o"));
-                RunProcess(GCC, $"{FLAGS_5} {FLAGS_4} {SEARCH_PATHS} \"{core_path}\" -o \"{core_out}\"");
+                RunProcess(GCC, $"{FLAGS_5} {FLAGS_4} {search_paths} \"{core_path}\" -o \"{core_out}\"");
             }
 
             for (int i = 0; i < FILES_ARDUINO_2.Length; i++)
             {
                 core_path = Path.Join(LIBRARY_DIRECTORY, "Arduino", FILES_ARDUINO_2[i]);
                 core_out = Path.Join(BUILD_DIRECTORY, "core", Filename(FILES_ARDUINO_2[i], "o"));
-                RunProcess(GPP, $"{FLAGS_1} {FLAGS_3} {FLAGS_4} {SEARCH_PATHS} \"{core_path}\" -o \"{core_out}\"");
+                RunProcess(GPP, $"{FLAGS_1} {FLAGS_3} {FLAGS_4} {search_paths} \"{core_path}\" -o \"{core_out}\"");
             }
 
             core_path = Path.Join(BUILD_DIRECTORY, "core", "core.a");
