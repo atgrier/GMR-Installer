@@ -244,6 +244,8 @@ namespace loco_prog
 
             string hex_out = Path.Join(BUILD_DIRECTORY, Filename(sketch_name, "ino.hex"));
             RunProcess(OBJCOPY, $"{FLAGS_11} \"{elf_out}\" \"{hex_out}\"");
+
+            RunProcess(AVR_SIZE, $"-A \"{elf_out}\"");
         }
     }
 }
