@@ -548,9 +548,6 @@
     <None Update="libraries\GMR\TrainMotor.h">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="libraries\MAKEFILE">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="libraries\RadioHead\LICENSE">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
