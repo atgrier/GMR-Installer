@@ -214,8 +214,8 @@ namespace loco_prog
             string core_out;
             for (int i = 0; i < FILES_ARDUINO_0.Length; i++)
             {
-                core_path = Path.GetFullPath(Path.Join(library_directory, "Arduino", FILES_ARDUINO_1[i]));
-                core_out = Path.GetFullPath(Path.Join(build_directory, "core", $"{FILES_ARDUINO_1[i]}.o"));
+                core_path = Path.GetFullPath(Path.Join(library_directory, "Arduino", FILES_ARDUINO_0[i]));
+                core_out = Path.GetFullPath(Path.Join(build_directory, "core", $"{FILES_ARDUINO_0[i]}.o"));
                 RunProcess(GCC, $"{FLAGS_6} {FLAGS_4} {PATHS} \"{core_path}\" -o \"{core_out}\"");
             }
 
