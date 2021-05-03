@@ -9,6 +9,11 @@ namespace loco_prog
     public partial class ArduinoSketch
     {
         private static readonly string LIBRARY_DIRECTORY = Path.GetFullPath(Path.Join(".", "libraries"));
+        private static readonly string AVRDUDE = "avrdude";
+
+        private static readonly string FLAGS_AVRDUDE = "-v -patmega32u4 -cavr109 -PCOM1 -b57600 -D";
+        private static readonly string AVR_CONF = Path.Join(LIBRARY_DIRECTORY, "avrdude", "avrdude.conf");
+
 
         private readonly string sketch_name;
         private string sketch_contents;
@@ -131,7 +136,7 @@ namespace loco_prog
 
         private void UploadSketch()
         {
-            Console.WriteLine("uploading file");
+            RunProcess(AVRDUDE, $"\"-C{AVR_CONF}\" {FLAGS_AVRDUDE} \"-Uflash:w:{hex_out}:i\"");
         }
     }
 }

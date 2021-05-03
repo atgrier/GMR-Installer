@@ -16,7 +16,14 @@ namespace loco_prog
             Path.Join("", "Users", Environment.UserName, "Library", "Arduino15"),
             Path.Join("~", ".arduino15")
         };
+        private static readonly string[] ARDUINO_PATHS =
+        {
+            Path.Join("C:", "", "Program Files (x86)", "Arduino")
+        };
+
         private static readonly string GCC_PATH_RELATIVE = Path.Join("packages", "arduino", "tools", "avr-gcc", "7.3.0-atmel3.6.1-arduino7", "bin");
+        private static readonly string CTAGS_PATH_RELATIVE = Path.Join("tools-builder", "ctags", "5.8-arduino11");
+        private static readonly string AVRDUDE_PATH_RELATIVE = Path.Join("packages", "arduino", "tools", "avrdude", "6.3.0-arduino17", "bin");
 
         private static readonly string GCC = "avr-gcc";
         private static readonly string GPP = "avr-g++";
@@ -60,6 +67,8 @@ namespace loco_prog
         private string file_sketch;
         private string sketch_path;
         private string output_path;
+
+        private string hex_out;
 
         private void CompileSketch()
         {
@@ -120,40 +129,48 @@ namespace loco_prog
             return false;
         }
 
-        private void AddGCCToPath()
+        private string GetPath(string exec, string[] base_paths, string relative_path)
         {
-            if (ExistsOnPath("avr-gcc"))
-                return;
+            if (ExistsOnPath(exec))
+                return null;
 
-            string gcc_path = "";
-            for (int j = 0; j < ARDUINO15_PATHS.Length; j++)
+            string exec_path = "";
+            for (int j = 0; j < base_paths.Length; j++)
             {
-                string path = Path.Join(ARDUINO15_PATHS[j], GCC_PATH_RELATIVE);
-                if (!ExistsOnPath(Path.Join(path, "avr-gcc")))
+                string path = Path.Join(base_paths[j], relative_path);
+                if (!ExistsOnPath(Path.Join(path, exec)))
                     continue;
 
-                gcc_path = path;
+                exec_path = path;
                 break;
             }
 
             int i = 0;
-            if (gcc_path == "")
+            if (exec_path == "")
                 while (i < 3)
                 {
                     i++;
-                    Console.WriteLine("Unable to detect path to avr-gcc.");
-                    Console.WriteLine("Please input full absolute path to the directory containing avr-gcc, e.g. ~/path/to/gcc/");
+                    Console.WriteLine($"Unable to detect path to {exec}.");
+                    Console.WriteLine($"Please input full absolute path to the directory containing {exec}, e.g. ~/path/to/{exec}");
                     Console.Write(" > ");
-                    gcc_path = Console.ReadLine();
-                    if (ExistsOnPath(Path.Join(gcc_path, "avr-gcc")))
+                    exec_path = Console.ReadLine();
+                    if (ExistsOnPath(Path.Join(exec_path, exec)))
                         break;
                     else if (i == 3)
                         throw new FileNotFoundException("Too many unsuccessful tries. Quitting Program.");
                 }
 
+            return exec_path;
+        }
+
+        private void AddGCCToPath()
+        {
+            string gcc_path = GetPath("avr-gcc", ARDUINO15_PATHS, GCC_PATH_RELATIVE);
+            string ctag_path = GetPath("ctags", ARDUINO_PATHS, CTAGS_PATH_RELATIVE);
+            string avrdude_path = GetPath("avrdude", ARDUINO15_PATHS, AVRDUDE_PATH_RELATIVE);
+
             string old_path = Environment.GetEnvironmentVariable("PATH");
-            string ctag_path = Path.Join("C:", "", "Program Files (x86)", "Arduino", "tools-builder", "ctags", "5.8-arduino11");
-            Environment.SetEnvironmentVariable("PATH", string.Join(Path.PathSeparator, gcc_path, ctag_path, old_path));
+            Environment.SetEnvironmentVariable("PATH", string.Join(Path.PathSeparator, gcc_path, ctag_path, avrdude_path, old_path));
         }
 
         private void DetectLibraries()
@@ -242,7 +259,7 @@ namespace loco_prog
             string eep_out = Path.Join(BUILD_DIRECTORY, Filename(sketch_name, "ino.eep"));
             RunProcess(OBJCOPY, $"{FLAGS_10} \"{elf_out}\" \"{eep_out}\"");
 
-            string hex_out = Path.Join(BUILD_DIRECTORY, Filename(sketch_name, "ino.hex"));
+            hex_out = Path.Join(BUILD_DIRECTORY, Filename(sketch_name, "ino.hex"));
             RunProcess(OBJCOPY, $"{FLAGS_11} \"{elf_out}\" \"{hex_out}\"");
 
             RunProcess(AVR_SIZE, $"-A \"{elf_out}\"");
