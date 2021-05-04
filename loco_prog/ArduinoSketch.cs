@@ -11,7 +11,6 @@ namespace loco_prog
         private static readonly string LIBRARY_DIRECTORY = Path.GetFullPath(Path.Join(".", "libraries"));
         private static readonly string AVRDUDE = "avrdude";
 
-        private static readonly string FLAGS_AVRDUDE = "-v -patmega32u4 -cavr109 -PCOM1 -b57600 -D";
         private static readonly string AVR_CONF = Path.Join(LIBRARY_DIRECTORY, "avrdude", "avrdude.conf");
 
 
@@ -136,7 +135,10 @@ namespace loco_prog
 
         private void UploadSketch()
         {
-            RunProcess(AVRDUDE, $"\"-C{AVR_CONF}\" {FLAGS_AVRDUDE} \"-Uflash:w:{hex_out}:i\"");
+            Console.WriteLine("Uploading...");
+
+            string com_port = "COM5";
+            RunProcess(AVRDUDE, $"\"-C{AVR_CONF}\" -v -patmega32u4 -cavr109 -P{com_port} -b57600 -D \"-Uflash:w:{hex_out}:i\"");
         }
     }
 }
