@@ -12,8 +12,11 @@
 #define CONTROLLER_ADDRESS <CONTROLLER_ADDRESS> // Controller's address
 #define LOCOMOTIVE_ADDRESS <LOCOMOTIVE_ADDRESS> // Locomotive's address
 #define RF69_FREQ 868.0
+#define RF69_KEY new uint8_t [16] {0xa, 0xb, 0xa, 0xd, 0xc, 0xa, 0xf, 0xe, \
+								   0xd, 0xe, 0xa, 0xd, 0xb, 0xe, 0xe, 0xf}
 #define RFM69_CS 8
 #define RFM69_INT 7
+#define RFM69_RST 4
 
 // Pin assignments
 #define PIN_BATTERY A0 // IO Pin for reading battery voltage
@@ -34,7 +37,7 @@
 
 // Radio initialization
 RH_RF69 driver(RFM69_CS, RFM69_INT);
-Radio radio(LOCOMOTIVE_ADDRESS, &driver);
+Radio radio(LOCOMOTIVE_ADDRESS, driver, RFM69_RST);
 uint8_t buf[RH_RF69_MAX_MESSAGE_LEN];
 
 // Other initialization
@@ -43,3 +46,9 @@ Lighting light_rear = Lighting(PIN_LIGHT_REAR);
 Lighting light_cab = Lighting(PIN_LIGHT_CAB);
 TwoPinMotor locomotive = TwoPinMotor(PIN_MOTOR1, PIN_MOTOR2, &light_front, &light_rear);
 long timer_disable = millis();
+
+void setup();
+void loop();
+void readBatteryVoltage();
+void shutdown();
+void throttle(uint8_t* command);

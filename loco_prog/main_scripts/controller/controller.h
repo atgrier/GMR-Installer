@@ -11,8 +11,11 @@
 // Radio parameters
 #define CONTROLLER_ADDRESS <CONTROLLER_ADDRESS> // Controller's address
 #define RF69_FREQ 868.0
+#define RF69_KEY new uint8_t [16] {0xa, 0xb, 0xa, 0xd, 0xc, 0xa, 0xf, 0xe, \
+								   0xd, 0xe, 0xa, 0xd, 0xb, 0xe, 0xe, 0xf}
 #define RFM69_CS 8
 #define RFM69_INT 7
+#define RFM69_RST 4
 
 // Rotary encoder inputs
 #define BUTTON_ENCODER A4
@@ -48,7 +51,7 @@
 // Button push time required (milliseconds) to leave e-stop mode
 #define ESTOP_DURATION 2000
 
-// Trick VS Code into understanding that EIMSK and INT1 are valid identifiers
+// Appease VS Code
 #ifndef EIMSK
 int EIMSK = 0;
 int INT1 = 0;
@@ -63,7 +66,7 @@ int INT1 = 0;
 
 // Radio initialization
 RH_RF69 driver(RFM69_CS, RFM69_INT);
-Radio radio(CONTROLLER_ADDRESS, &driver);
+Radio radio(CONTROLLER_ADDRESS, driver, RFM69_RST);
 uint8_t buf[RH_RF69_MAX_MESSAGE_LEN];
 
 // Other initialization
@@ -75,11 +78,18 @@ uint32_t e_stop_timer;
 
 // Controller object with list of locomotives
 Locomotive locomotives[] = {
-  Locomotive(<LOCOMOTIVE_1>, TRAIN_LED_0, &radio), // DB Steam
-  Locomotive(<LOCOMOTIVE_2>, TRAIN_LED_1, &radio), // Great Norther Steam
-  Locomotive(<LOCOMOTIVE_3>, TRAIN_LED_2, &radio), // RhB Ge 6/6 1 (Crocodile)
-  Locomotive(<LOCOMOTIVE_4>, TRAIN_LED_3, &radio)  // Stainz
+		Locomotive(<LOCOMOTIVE_1>, TRAIN_LED_0, &radio), // DB Steam
+		Locomotive(<LOCOMOTIVE_2>, TRAIN_LED_1, &radio), // Great Norther Steam
+		Locomotive(<LOCOMOTIVE_3>, TRAIN_LED_2, &radio), // RhB Ge 6/6 1 (Crocodile)
+		Locomotive(<LOCOMOTIVE_4>, TRAIN_LED_3, &radio)  // Stainz
 };
 const int num_locomotives = (int)(sizeof(locomotives) / sizeof(Locomotive));
 Controller trains = Controller(LED_INDICATOR_0, LED_INDICATOR_1, SPEED_MAX, num_locomotives,
-															 locomotives);
+	locomotives);
+
+void setup();
+void loop();
+void update_locomotive_speed();
+void getCurrentTrain();
+void eStop();
+void readEncoder();
