@@ -42,58 +42,52 @@ void function(uint8_t* command)
 
 void setup()
 {
-  Serial.begin(115200); // configure serial interface
-  Serial.flush();
+    // Initialize radio
+    Serial.begin(115200);
+    radio.init(RF69_FREQ, RF69_KEY);
 
-  // Initialize radio
-  driver.setFrequency(RF69_FREQ);
-  driver.setTxPower(20, true);
-  uint8_t key[] = {0xa, 0xb, 0xa, 0xd, 0xc, 0xa, 0xf, 0xe,
-                   0xd, 0xe, 0xa, 0xd, 0xb, 0xe, 0xe, 0xf};
-  driver.setEncryptionKey(key);
-
-  pinMode(PIN_BATTERY, INPUT);
-  // pinMode(13, OUTPUT);
-  // digitalWrite(13, HIGH);
-  light_cab.On();
+    pinMode(PIN_BATTERY, INPUT);
+    // pinMode(13, OUTPUT);
+    // digitalWrite(13, HIGH);
+    light_cab.On();
 }
 
 void loop()
 {
-  // readBatteryVoltage();
+    // readBatteryVoltage();
 
-  if (radio.available())
-  {
-    // Serial.println("manager");
-    uint8_t len = sizeof(buf);
-    uint8_t from;
-    if (radio.receive(buf, &len, &from))
+    if (radio.available())
     {
-      //Serial.print("got request from : 0x");
-      //Serial.print(from, HEX);
-      //Serial.print(": ");
-      // Serial.println(len);
-      // Serial.println((char*)buf);
+        // Serial.println("manager");
+        uint8_t len = sizeof(buf);
+        uint8_t from;
+        if (radio.receive(buf, &len, &from))
+        {
+            //Serial.print("got request from : 0x");
+            //Serial.print(from, HEX);
+            //Serial.print(": ");
+            // Serial.println(len);
+            // Serial.println((char*)buf);
 
-      switch (buf[0])
-      {
-      case 'e': // E-Stop
-        locomotive.disable(true);
-        break;
+            switch (buf[0])
+            {
+            case 'e': // E-Stop
+                locomotive.disable(true);
+                break;
 
-      case 't': // Throttle
-        throttle(buf);
-        break;
+            case 't': // Throttle
+                throttle(buf);
+                break;
 
-      case 'f': // Function
-        function(buf);
-        break;
-      }
+            case 'f': // Function
+                function(buf);
+                break;
+            }
 
-      timer_disable = millis();
+            timer_disable = millis();
+        }
     }
-  }
 
-  if (millis() - timer_disable > 500)
-    locomotive.disable();
+    if (millis() - timer_disable > 500)
+        locomotive.disable();
 }
