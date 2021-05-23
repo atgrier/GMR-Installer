@@ -25,10 +25,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ArduinoUploader" Version="3.2.0" />
+    <PackageReference Include="Avalonia" Version="0.10.5" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.5" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.5" />
+    <PackageReference Include="ReactiveUI" Version="13.3.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="forms\landing.axaml.cs">
+      <DependentUpon>landing.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

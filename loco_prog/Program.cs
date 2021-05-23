@@ -1,25 +1,19 @@
-﻿using System;
-//using ArduinoUploader;
-//using ArduinoUploader.Hardware;
+﻿using Avalonia;
+using System;
+
 
 namespace loco_prog
 {
     class Program
     {
-        static void Main()
+        public static void Main(string[] args)
         {
-            //Console.WriteLine("Hello World!");
-            //var filename = @"loco_code.ino.hex";
-            //var portname = "COM7";
-            //var uploader = new ArduinoSketchUploader(
-            //    new ArduinoSketchUploaderOptions()
-            //    {
-            //        FileName = filename,
-            //        PortName = portname,
-            //        ArduinoModel = ArduinoModel.UnoR3
-            //    });
-            //uploader.UploadSketch();
+            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+            //new ArduinoSketch(GetSketch());
+        }
 
+        public string GetSketch()
+        {
             string[] sketches = { "controller", "receiver" };
             Console.WriteLine($"Enter Digit to select sketch, [0] {sketches[0]}, [1] {sketches[1]}:");
             Console.Write(" > ");
@@ -34,7 +28,12 @@ namespace loco_prog
                 Console.WriteLine($"Digit out of valid range; defaulting to {sketches[0]}.");
                 index = 0;
             }
-            new ArduinoSketch(sketches[index]);
+            return sketches[index];
+        }
+
+        public static AppBuilder BuildAvaloniaApp()
+        {
+            return AppBuilder.Configure<App>().UsePlatformDetect().LogToTrace();
         }
     }
 }
