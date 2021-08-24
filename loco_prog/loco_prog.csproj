@@ -35,6 +35,9 @@
     <Compile Update="forms\landing.axaml.cs">
       <DependentUpon>landing.axaml</DependentUpon>
     </Compile>
+    <Compile Update="forms\controller.axaml.cs">
+      <DependentUpon>controller.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
