@@ -4,7 +4,7 @@ using Avalonia.Markup.Xaml;
 
 namespace loco_prog
 {
-    public class App : Application
+    public class GuiApp : Application
     {
         public override void Initialize()
         {

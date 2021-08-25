@@ -33,7 +33,7 @@ namespace loco_prog
 
         public static AppBuilder BuildAvaloniaApp()
         {
-            return AppBuilder.Configure<App>().UsePlatformDetect().LogToTrace();
+            return AppBuilder.Configure<GuiApp>().UsePlatformDetect().LogToTrace();
         }
     }
 }

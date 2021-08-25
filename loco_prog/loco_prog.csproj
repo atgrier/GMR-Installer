@@ -32,8 +32,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="forms\landing.axaml.cs">
-      <DependentUpon>landing.axaml</DependentUpon>
+    <Compile Update="forms\MainWindow.axaml.cs">
+      <DependentUpon>MainWindow.axaml</DependentUpon>
     </Compile>
     <Compile Update="forms\controller.axaml.cs">
       <DependentUpon>controller.axaml</DependentUpon>
