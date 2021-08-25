@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         x:Class="loco_prog.MainWindow"
         Title="MainWindow"
-	    Width="500" Height="400">
+	    Width="360" Height="320">
 
 	<Border CornerRadius="2"
 			BorderThickness="1"
@@ -12,19 +12,15 @@
 			Padding="2">
 		<TabControl>
 			<TabItem Header="Controller">
-				<ScrollViewer HorizontalScrollBarVisibility="Auto"
-							  VerticalScrollBarVisibility="Auto">
+				<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
 					<StackPanel>
-						<Grid ShowGridLines="False"
-							  ColumnDefinitions="180,Auto"
-							  RowDefinitions="40,40,40,40,40"
-							  Margin="4"
-							  VerticalAlignment="Top">
-							<TextBlock Text="Controller Address:" TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Padding="2" Margin="4" ToolTip.Tip="Recommended from 100 to 199"/>
-							<TextBlock Text="Locomotive #1 Address:" TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Padding="2" Margin="4" ToolTip.Tip="Recommended from 200 to 299"/>
-							<TextBlock Text="Locomotive #2 Address:" TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Padding="2" Margin="4" ToolTip.Tip="Recommended from 200 to 299"/>
-							<TextBlock Text="Locomotive #3 Address:" TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Padding="2" Margin="4" ToolTip.Tip="Recommended from 200 to 299"/>
-							<TextBlock Text="Locomotive #4 Address:" TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Padding="2" Margin="4" ToolTip.Tip="Recommended from 200 to 299"/>
+						<Grid ColumnDefinitions="180,Auto" RowDefinitions="40,40,40,40,40"
+							  Margin="4" VerticalAlignment="Top">
+							<TextBlock TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Padding="2" Margin="4" ToolTip.Tip="Recommended from 100 to 199">Controller Address:</TextBlock>
+							<TextBlock TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Padding="2" Margin="4" ToolTip.Tip="Recommended from 200 to 299">Locomotive #1 Address:</TextBlock>
+							<TextBlock TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Padding="2" Margin="4" ToolTip.Tip="Recommended from 200 to 299">Locomotive #2 Address:</TextBlock>
+							<TextBlock TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Padding="2" Margin="4" ToolTip.Tip="Recommended from 200 to 299">Locomotive #3 Address:</TextBlock>
+							<TextBlock TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Padding="2" Margin="4" ToolTip.Tip="Recommended from 200 to 299">Locomotive #4 Address:</TextBlock>
 							<TextBox AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="0" Watermark="100" Margin="4" Width="100" VerticalAlignment="Center"/>
 							<TextBox AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="1" Watermark="200" Margin="4" Width="100" VerticalAlignment="Center"/>
 							<TextBox AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="2" Watermark="201" Margin="4" Width="100" VerticalAlignment="Center"/>
@@ -36,18 +32,14 @@
 				</ScrollViewer>
 			</TabItem>
 			<TabItem Header="Locomotive">
-				<ScrollViewer HorizontalScrollBarVisibility="Auto"
-							  VerticalScrollBarVisibility="Auto">
+				<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
 					<StackPanel>
-						<Grid ShowGridLines="False"
-							  ColumnDefinitions="180,Auto"
-							  RowDefinitions="40,40"
-							  Margin="4"
-							  VerticalAlignment="Top">
-							<TextBlock Text="Locomotive Address:" TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Padding="2" Margin="4" ToolTip.Tip="Recommended from 200 to 299"/>
-							<TextBlock Text="Controller Address:" TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Padding="2" Margin="4" ToolTip.Tip="Recommended from 100 to 199"/>
-							<TextBox AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="0" Watermark="200" Margin="4" Width="100" VerticalAlignment="Center"/>
-							<TextBox AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="1" Watermark="100" Margin="4" Width="100" VerticalAlignment="Center"/>
+						<Grid ColumnDefinitions="180,Auto" RowDefinitions="40,40"
+							  Margin="4" VerticalAlignment="Top">
+							<TextBlock TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Padding="2" Margin="4" ToolTip.Tip="Recommended from 100 to 199">Controller Address:</TextBlock>
+							<TextBlock TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Padding="2" Margin="4" ToolTip.Tip="Recommended from 200 to 299">Locomotive Address:</TextBlock>
+							<TextBox AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="0" Watermark="100" Margin="4" Width="100" VerticalAlignment="Center"/>
+							<TextBox AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="1" Watermark="200" Margin="4" Width="100" VerticalAlignment="Center"/>
 						</Grid>
 						<Button Width="160" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10">Program Locomotive</Button>
 					</StackPanel>
