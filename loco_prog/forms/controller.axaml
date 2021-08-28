@@ -21,13 +21,13 @@
 							<TextBlock TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="2" Padding="2" Margin="4" ToolTip.Tip="Recommended from 200 to 299">Locomotive #2 Address:</TextBlock>
 							<TextBlock TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="3" Padding="2" Margin="4" ToolTip.Tip="Recommended from 200 to 299">Locomotive #3 Address:</TextBlock>
 							<TextBlock TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="4" Padding="2" Margin="4" ToolTip.Tip="Recommended from 200 to 299">Locomotive #4 Address:</TextBlock>
-							<TextBox AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="0" Watermark="100" Margin="4" Width="100" VerticalAlignment="Center"/>
-							<TextBox AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="1" Watermark="200" Margin="4" Width="100" VerticalAlignment="Center"/>
-							<TextBox AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="2" Watermark="201" Margin="4" Width="100" VerticalAlignment="Center"/>
-							<TextBox AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="3" Watermark="202" Margin="4" Width="100" VerticalAlignment="Center"/>
-							<TextBox AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="4" Watermark="203" Margin="4" Width="100" VerticalAlignment="Center"/>
+							<TextBox Text="{Binding ControllerAddress}" AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="0" Watermark="100" Margin="4" Width="100" VerticalAlignment="Center"/>
+							<TextBox Text="{Binding LocomotiveAddress1}" AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="1" Watermark="200" Margin="4" Width="100" VerticalAlignment="Center"/>
+							<TextBox Text="{Binding LocomotiveAddress2}" AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="2" Watermark="201" Margin="4" Width="100" VerticalAlignment="Center"/>
+							<TextBox Text="{Binding LocomotiveAddress3}" AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="3" Watermark="202" Margin="4" Width="100" VerticalAlignment="Center"/>
+							<TextBox Text="{Binding LocomotiveAddress4}" AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="4" Watermark="203" Margin="4" Width="100" VerticalAlignment="Center"/>
 						</Grid>
-						<Button Width="160" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10">Program Controller</Button>
+						<Button x:Class="loco_prog.MainWindow" Click="ProgramController" Width="160" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10" Content="Program Controller"/>
 					</StackPanel>
 				</ScrollViewer>
 			</TabItem>
@@ -38,10 +38,10 @@
 							  Margin="4" VerticalAlignment="Top">
 							<TextBlock TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="0" Padding="2" Margin="4" ToolTip.Tip="Recommended from 100 to 199">Controller Address:</TextBlock>
 							<TextBlock TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Padding="2" Margin="4" ToolTip.Tip="Recommended from 200 to 299">Locomotive Address:</TextBlock>
-							<TextBox AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="0" Watermark="100" Margin="4" Width="100" VerticalAlignment="Center"/>
-							<TextBox AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="1" Watermark="200" Margin="4" Width="100" VerticalAlignment="Center"/>
+							<TextBox Text="{Binding LocomotiveAddress1}" AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="0" Watermark="100" Margin="4" Width="100" VerticalAlignment="Center"/>
+							<TextBox Text="{Binding ControllerAddress}" AcceptsReturn="False" AcceptsTab="False" Grid.Column="1" Grid.Row="1" Watermark="200" Margin="4" Width="100" VerticalAlignment="Center"/>
 						</Grid>
-						<Button Width="160" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10">Program Locomotive</Button>
+						<Button x:Class="loco_prog.MainWindow" Click="ProgramLocomotive" Width="160" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10" Content="Program Locomotive"/>
 					</StackPanel>
 				</ScrollViewer>
 			</TabItem>
